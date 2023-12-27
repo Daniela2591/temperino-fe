@@ -1,0 +1,26 @@
+{
+  "cwd": "C:\\Users\\danie\\Documents\\GitHub\\temperino-fe",
+  "type": [
+    "web",
+    "capacitor"
+  ],
+  "name": "Temperino",
+  "framework": "vue",
+  "template": "blank",
+  "bundler": "vite",
+  "cssPreProcessor": false,
+  "theming": {
+    "customColor": true,
+    "color": "#007aff",
+    "darkMode": true,
+    "iconFonts": true
+  },
+  "customBuild": false,
+  "pkg": "com.strifelab.temperino",
+  "capacitor": {
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  }
+}
