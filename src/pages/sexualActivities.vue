@@ -1,6 +1,7 @@
 <template>
     <f7-page name="sexualactivities">
-        <f7-navbar title="Sexual Activities" back-link="Back"></f7-navbar>
+        <Navbar :backLink="false" title="Attività Sessuale" />
+
         <f7-block-title>Avete fatto gli sporcaccioni?</f7-block-title>
         <div class="list list-strong-ios list-outline-ios list-dividers-ios">
             <ul>
@@ -140,8 +141,16 @@
 <script>
 import axios from 'axios'
 import { f7, f7ready } from 'framework7-vue'
+import Navbar from '@/components/layout/Navbar.vue'
 
 export default {
+    props: {
+        f7route: Object,
+        f7router: Object,
+    },
+    components: {
+        Navbar
+    },
     data() {
         return {
             form: {
@@ -170,15 +179,27 @@ export default {
                     console.log(error)
                 })
 
+        },
+        getCurrentDate(date = new Date()) {
+            const year = date.toLocaleString('default', { year: 'numeric' });
+            const month = date.toLocaleString('default', {
+                month: '2-digit',
+            });
+            const day = date.toLocaleString('default', { day: '2-digit' });
+
+            return [year, month, day].join('-');
         }
     },
 
     name: 'Sexual Activities',
     mounted() {
+        this.form.data.Date = this.getCurrentDate()
+
         f7ready((f7) => {
             f7.calendar.create({
                 inputEl: '#date-picker-sexualActivities',
                 closeOnSelect: true,
+                value: [this.getCurrentDate()],
                 on: {
                     change: (calendar, value) => {
                         value = value[0]

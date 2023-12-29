@@ -1,6 +1,6 @@
 <template>
     <f7-page name="masturbationList">
-        <f7-navbar title="Masturbation List" back-link="Back"></f7-navbar>
+        <Navbar :backLink="false" title="Lista Masturbazione" />
         
         <f7-block-title>Lista Masturbate</f7-block-title>
         
@@ -20,9 +20,16 @@
 
 import axios from 'axios'
 import { f7, f7ready } from 'framework7-vue'
-
+import Navbar from '@/components/layout/Navbar.vue'
 
 export default {
+    props: {
+        f7route: Object,
+        f7router: Object,
+    },
+    components: {
+        Navbar
+    },
     data() {
         return {
             masturbationList: []

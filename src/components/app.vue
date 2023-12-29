@@ -1,6 +1,8 @@
 <template>
   <f7-app v-bind="f7params">
 
+    <SideMenu />
+
   <!-- Your main view, should have "view-main" class -->
   <f7-view main class="safe-areas" url="/" :browserHistory="true"></f7-view>
 
@@ -14,8 +16,12 @@
   import capacitorApp from '../js/capacitor-app.js';
   import routes from '../js/routes.js';
   import store from '../js/store';
+  import SideMenu from './layout/SideMenu.vue'
 
   export default {
+    components: {
+        SideMenu
+    },
     setup() {
       const device = getDevice();
       // Framework7 Parameters
