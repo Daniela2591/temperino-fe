@@ -95,7 +95,7 @@ export default {
             form: {
                     data: {
                         Who: "A",
-                        N_Orgasm: 1,
+                        N_Orgasm: null,
                         Toys: 0,
                         Date: ""
                 }
