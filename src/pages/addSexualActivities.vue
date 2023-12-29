@@ -1,6 +1,6 @@
 <template>
     <f7-page name="sexualactivities">
-        <Navbar :backLink="false" title="Attività Sessuale" />
+        <Navbar :backLink="false" title="Aggiungi scopata" />
 
         <f7-block-title>Avete fatto gli sporcaccioni?</f7-block-title>
         <div class="list list-strong-ios list-outline-ios list-dividers-ios">
@@ -94,7 +94,8 @@
                     <div class="item-inner">
                         <div class="item-title item-floating-label">Numero orgasmi</div>
                         <div class="item-input-wrap">
-                            <input type="number" min="0" max="12" placeholder="Numero orgasmi Andrea" v-model="form.data.Orgasm_A">
+                            <input type="number" min="0" max="12" placeholder="Numero orgasmi Andrea"
+                                v-model="form.data.Orgasm_A">
                             <span class="input-clear-button"></span>
                         </div>
                     </div>
@@ -110,7 +111,8 @@
                     <div class="item-inner">
                         <div class="item-title item-floating-label">Numero orgasmi</div>
                         <div class="item-input-wrap">
-                            <input type="number" min="0" max="12" placeholder="Numero orgasmi Daniela" v-model="form.data.Orgasm_D">
+                            <input type="number" min="0" max="12" placeholder="Numero orgasmi Daniela"
+                                v-model="form.data.Orgasm_D">
                             <span class="input-clear-button"></span>
                         </div>
                     </div>
@@ -123,8 +125,8 @@
                     <div class="item-content item-input">
                         <div class="item-inner">
                             <div class="item-input-wrap">
-                                <input type="text" v-model="form.data.Date" placeholder="Data Sesso"
-                                    readonly="readonly" id="date-picker-sexualActivities" />
+                                <input type="text" v-model="form.data.Date" placeholder="Data Sesso" readonly="readonly"
+                                    id="date-picker-sexualActivities" />
                             </div>
                         </div>
                     </div>
@@ -133,7 +135,7 @@
         </div>
 
         <f7-block>
-            <f7-button fill round @click="getInputForm">Salva</f7-button>
+            <f7-button fill round @click="saveData">Salva</f7-button>
         </f7-block>
     </f7-page>
 </template>
@@ -142,6 +144,7 @@
 import axios from 'axios'
 import { f7, f7ready } from 'framework7-vue'
 import Navbar from '@/components/layout/Navbar.vue'
+import constants from '@/js/constants'
 
 export default {
     props: {
@@ -153,6 +156,7 @@ export default {
     },
     data() {
         return {
+            constants: constants,
             form: {
                 "data": {
                     "Sex": 0,
@@ -169,17 +173,27 @@ export default {
         }
     },
     methods: {
-        getInputForm() {
+        async saveData() {
+            try {
+                await axios.post(this.constants.api.sexualActivities, this.form)
 
-            axios.post('http://localhost:1337/api/sexual-activities', this.form)
-                .then(function (response) {
-                    console.log(response)
-                })
-                .catch(function (error) {
-                    console.log(error)
+                f7.toast.create({
+                    text: 'Scopata salvata con successo',
+                    closeTimeout: 2000,
+                }).open()
+
+                this.f7router.navigate('/')
+            }
+            catch (e) {
+                f7.toast.create({
+                    text: 'Errore generico nel salvataggio dei dati',
+                    closeTimeout: 2000,
                 })
 
+                console.error(e)
+            }
         },
+
         getCurrentDate(date = new Date()) {
             const year = date.toLocaleString('default', { year: 'numeric' });
             const month = date.toLocaleString('default', {

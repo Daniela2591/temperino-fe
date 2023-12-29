@@ -1,7 +1,7 @@
 
 import HomePage from '../pages/home.vue';
-import Masturbation from '../pages/masturbation.vue'
-import SexualActivities from '../pages/sexualactivities.vue'
+import AddMasturbation from '../pages/addMasturbation.vue'
+import AddSexualActivities from '../pages/addSexualActivities.vue'
 import MasturbationList from '../pages/masturbationList.vue'
 import SexualActivitiesList from '../pages/sexualActivitiesList.vue'
 
@@ -11,12 +11,12 @@ var routes = [
     component: HomePage,
   },
   {
-    path: '/masturbation/',
-    component: Masturbation,
+    path: '/addMasturbation/',
+    component: AddMasturbation,
   },
   {
-    path: '/sexualActivities/',
-    component: SexualActivities,
+    path: '/addSexualActivities/',
+    component: AddSexualActivities,
   },
   {
     path: '/masturbationList/',

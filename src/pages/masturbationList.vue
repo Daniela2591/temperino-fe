@@ -1,6 +1,6 @@
 <template>
     <f7-page name="masturbationList">
-        <Navbar :backLink="false" title="Lista Masturbazione" />
+        <Navbar :backLink="false" title="Lista Masturbazioni" />
         
         <f7-block-title>Lista Masturbate</f7-block-title>
         
@@ -21,6 +21,7 @@
 import axios from 'axios'
 import { f7, f7ready } from 'framework7-vue'
 import Navbar from '@/components/layout/Navbar.vue'
+import constants from '@/js/constants'
 
 export default {
     props: {
@@ -32,6 +33,7 @@ export default {
     },
     data() {
         return {
+            constants: constants,
             masturbationList: []
 
         }
@@ -41,7 +43,7 @@ export default {
     mounted() {
         f7ready(async (f7) => {
             try{
-                let response = await axios.get('http://localhost:1337/api/masturbations')
+                let response = await axios.get(this.constants.api.masturbation)
                 this.masturbationList = response.data.data
                 console.log(this.masturbationList)
             }

@@ -1,6 +1,6 @@
 <template>
     <f7-page name="masturbation">
-        <Navbar :backLink="false" title="Masturbazione" />
+        <Navbar :backLink="false" title="Aggiungi masturbazione" />
 
         <f7-block-title>Chi si è masturbato?</f7-block-title>
         <div class="list list-strong-ios list-outline-ios list-dividers-ios">
@@ -80,7 +80,7 @@
         </div>
 
         <f7-block>
-            <f7-button fill round @click="getInputForm">Salva</f7-button>
+            <f7-button fill round @click="saveData">Salva</f7-button>
         </f7-block>
     </f7-page>
 </template>
@@ -89,8 +89,10 @@
 import axios from 'axios'
 import { f7, f7ready } from 'framework7-vue'
 import Navbar from '@/components/layout/Navbar.vue'
+import constants from '@/js/constants'
 
 export default {
+    name: '', 
     props: {
         f7route: Object,
         f7router: Object,
@@ -100,6 +102,7 @@ export default {
     },
     data() {
         return {
+            constants: constants,
             form: {
                 data: {
                     Who: "A",
@@ -111,16 +114,25 @@ export default {
         }
     },
     methods: {
-        getInputForm() {
+        async saveData() {
+            try {
+                await axios.post(this.constants.api.masturbation, this.form)
+                
+                f7.toast.create({
+                    text: 'Masturbata salvata con successo',
+                    closeTimeout: 2000,
+                }).open()
 
-            axios.post('http://localhost:1337/api/masturbations', this.form)
-                .then(function (response) {
-                    console.log(response)
-                })
-                .catch(function (error) {
-                    console.log(error)
+                this.f7router.navigate('/')
+            }
+            catch(e){
+                f7.toast.create({
+                    text: 'Errore generico nel salvataggio dei dati',
+                    closeTimeout: 2000,
                 })
 
+                console.error(e)
+            }
         },
 
         getCurrentDate(date = new Date()) {
