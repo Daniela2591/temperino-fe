@@ -11,7 +11,7 @@
                             <div class="item-title">Sesso</div>
                             <div class="item-after">
                                 <div class="toggle toggle-init color-red">
-                                    <input type="checkbox" v-model="form.data.Sex">
+                                    <input type="checkbox" v-model="form.data.sex">
                                     <span class="toggle-icon"></span>
                                 </div>
                             </div>
@@ -24,7 +24,7 @@
                             <div class="item-title">Pompino</div>
                             <div class="item-after">
                                 <div class="toggle toggle-init color-red">
-                                    <input type="checkbox" v-model="form.data.Blowjob">
+                                    <input type="checkbox" v-model="form.data.blowjob">
                                     <span class="toggle-icon"></span>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                             <div class="item-title">Sega</div>
                             <div class="item-after">
                                 <div class="toggle toggle-init color-red">
-                                    <input type="checkbox" v-model="form.data.Handjob">
+                                    <input type="checkbox" v-model="form.data.handjob">
                                     <span class="toggle-icon"></span>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                             <div class="item-title">Anal</div>
                             <div class="item-after">
                                 <div class="toggle toggle-init color-red">
-                                    <input type="checkbox" v-model="form.data.Anal">
+                                    <input type="checkbox" v-model="form.data.anal">
                                     <span class="toggle-icon"></span>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                             <div class="item-title">Ditalino</div>
                             <div class="item-after">
                                 <div class="toggle toggle-init color-red">
-                                    <input type="checkbox" v-model="form.data.Fingering">
+                                    <input type="checkbox" v-model="form.data.fingering">
                                     <span class="toggle-icon"></span>
                                 </div>
                             </div>
@@ -76,17 +76,36 @@
                             <div class="item-title">Leccata</div>
                             <div class="item-after">
                                 <div class="toggle toggle-init color-red">
-                                    <input type="checkbox" v-model="form.data.Lick">
+                                    <input type="checkbox" v-model="form.data.lick">
                                     <span class="toggle-icon"></span>
                                 </div>
                             </div>
                         </div>
                     </label>
                 </li>
+                <li>
+                    <a class="item-link smart-select smart-select-init">
+                        <select name="cumshot" v-model="form.data.cumshot">
+                            <option value="mouth">Bocca</option>
+                            <option value="face">Faccia</option>
+                            <option value="tits">Tette</option>
+                            <option value="belly">Pancia</option>
+                            <option value="pussy">Figa</option>
+                            <option value="ass">Culo</option>
+                            <option value="butts">Chiappe</option>
+                        </select>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">Dove sborrata?</div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="list list-strong-ios list-dividers-ios inset-ios">
             <ul>
+                
                 <li class="item-content item-input item-input-outline">
                     <div class="item-media">
                         <i class="icon demo-list-icon"></i>
@@ -95,7 +114,7 @@
                         <div class="item-title item-floating-label">Numero orgasmi</div>
                         <div class="item-input-wrap">
                             <input type="number" min="0" max="12" placeholder="Numero orgasmi Andrea"
-                                v-model="form.data.Orgasm_A">
+                                v-model="form.data.orgasm_a">
                             <span class="input-clear-button"></span>
                         </div>
                     </div>
@@ -112,7 +131,7 @@
                         <div class="item-title item-floating-label">Numero orgasmi</div>
                         <div class="item-input-wrap">
                             <input type="number" min="0" max="12" placeholder="Numero orgasmi Daniela"
-                                v-model="form.data.Orgasm_D">
+                                v-model="form.data.orgasm_d">
                             <span class="input-clear-button"></span>
                         </div>
                     </div>
@@ -125,7 +144,7 @@
                     <div class="item-content item-input">
                         <div class="item-inner">
                             <div class="item-input-wrap">
-                                <input type="text" v-model="form.data.Date" placeholder="Data Sesso" readonly="readonly"
+                                <input type="text" v-model="form.data.date" placeholder="Data Sesso" readonly="readonly"
                                     id="date-picker-sexualActivities" />
                             </div>
                         </div>
@@ -159,15 +178,16 @@ export default {
             constants: constants,
             form: {
                 "data": {
-                    "Sex": 0,
-                    "Blowjob": 0,
-                    "Handjob": 0,
-                    "Anal": 0,
-                    "Fingering": 0,
-                    "Lick": 0,
-                    "Orgasm_D": null,
-                    "Orgasm_A": null,
-                    "Date": ""
+                    "sex": 0,
+                    "blowjob": 0,
+                    "handjob": 0,
+                    "anal": 0,
+                    "fingering": 0,
+                    "lick": 0,
+                    "cumshot": "",
+                    "orgasm_d": null,
+                    "orgasm_a": null,
+                    "date": ""
                 }
             }
         }
@@ -207,7 +227,7 @@ export default {
 
     name: 'Sexual Activities',
     mounted() {
-        this.form.data.Date = this.getCurrentDate()
+        this.form.data.date = this.getCurrentDate()
 
         f7ready((f7) => {
             f7.calendar.create({
@@ -222,7 +242,7 @@ export default {
                         var month = ('0' + (value.getMonth() + 1)).slice(-2)
                         var day = ('0' + value.getDate()).slice(-2)
 
-                        this.form.data.Date = year + '-' + month + '-' + day
+                        this.form.data.date = year + '-' + month + '-' + day
                     }
                 }
             })

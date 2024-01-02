@@ -4,7 +4,7 @@
 
         <div class="list links-list list-outline-ios list-strong-ios list-dividers-ios">
         <ul v-for="item in sexualActivitiesList" v-bind:key="item">
-            <li><a> {{ item.attributes.Date }}</a></li>
+            <li><a> {{ item.attributes.date }}</a></li>
         </ul>
         </div>
     </f7-page>

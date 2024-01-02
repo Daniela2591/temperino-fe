@@ -7,7 +7,7 @@
             <ul>
                 <li>
                     <label class="item-radio item-radio-icon-start item-content">
-                        <input type="radio" v-model="form.data.Who" name="demo-radio-start" value="A" checked />
+                        <input type="radio" v-model="form.data.who" name="demo-radio-start" value="A" checked />
                         <i class="icon icon-radio"></i>
                         <div class="item-inner">
                             <div class="item-title">Andrea</div>
@@ -16,7 +16,7 @@
                 </li>
                 <li>
                     <label class="item-radio item-radio-icon-start item-content">
-                        <input type="radio" v-model="form.data.Who" name="demo-radio-start" value="D" />
+                        <input type="radio" v-model="form.data.who" name="demo-radio-start" value="D" />
                         <i class="icon icon-radio"></i>
                         <div class="item-inner">
                             <div class="item-title">Daniela</div>
@@ -35,7 +35,7 @@
                             <div class="item-title">Toys</div>
                             <div class="item-after">
                                 <div class="toggle toggle-init color-red">
-                                    <input type="checkbox" v-model="form.data.Toys">
+                                    <input type="checkbox" v-model="form.data.toys">
                                     <span class="toggle-icon"></span>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                     <div class="item-inner">
                         <div class="item-title item-floating-label">Numero orgasmi</div>
                         <div class="item-input-wrap">
-                            <input type="number" min="0" max="12" placeholder="Numero orgasmi" v-model="form.data.N_Orgasm">
+                            <input type="number" min="0" max="12" placeholder="Numero orgasmi" v-model="form.data.n_orgasms">
                             <span class="input-clear-button"></span>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                     <div class="item-content item-input">
                         <div class="item-inner">
                             <div class="item-input-wrap">
-                                <input type="text" v-model="form.data.Date" placeholder="Data masturbazione"
+                                <input type="text" v-model="form.data.date" placeholder="Data masturbazione"
                                     readonly="readonly" id="date-picker-masturbation" />
                             </div>
                         </div>
@@ -139,7 +139,7 @@ export default {
             const year = date.toLocaleString('default', { year: 'numeric' });
             const month = date.toLocaleString('default', {
                 month: '2-digit',
-            });
+            })
             const day = date.toLocaleString('default', { day: '2-digit' });
 
             return [year, month, day].join('-');
@@ -147,10 +147,9 @@ export default {
 
     
     },
-
     name: 'Masturbation',
     mounted() {
-        this.form.data.Date = this.getCurrentDate()
+        this.form.data.date = this.getCurrentDate()
         
         f7ready((f7) => {
             f7.calendar.create({
@@ -165,7 +164,7 @@ export default {
                         var month = ('0' + (value.getMonth() + 1)).slice(-2)
                         var day = ('0' + value.getDate()).slice(-2)
 
-                        this.form.data.Date = year + '-' + month + '-' + day
+                        this.form.data.date = year + '-' + month + '-' + day
                     }
                 }
             })
