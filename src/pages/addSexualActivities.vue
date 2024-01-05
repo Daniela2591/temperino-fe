@@ -90,7 +90,8 @@
                             <option value="face">Faccia</option>
                             <option value="tits">Tette</option>
                             <option value="belly">Pancia</option>
-                            <option value="pussy">Figa</option>
+                            <option value="pussy-inside">Figa (dentro)</option>
+                            <option value="pussy-condom">Figa (ghindolo)</option>
                             <option value="ass">Culo</option>
                             <option value="butts">Chiappe</option>
                         </select>
@@ -111,7 +112,7 @@
                         <i class="icon demo-list-icon"></i>
                     </div>
                     <div class="item-inner">
-                        <div class="item-title item-floating-label">Numero orgasmi</div>
+                        <div class="item-title item-floating-label">Numero orgasmi Andrea</div>
                         <div class="item-input-wrap">
                             <input type="number" min="0" max="12" placeholder="Numero orgasmi Andrea"
                                 v-model="form.data.orgasm_a">
@@ -128,7 +129,7 @@
                         <i class="icon demo-list-icon"></i>
                     </div>
                     <div class="item-inner">
-                        <div class="item-title item-floating-label">Numero orgasmi</div>
+                        <div class="item-title item-floating-label">Numero orgasmi Daniela</div>
                         <div class="item-input-wrap">
                             <input type="number" min="0" max="12" placeholder="Numero orgasmi Daniela"
                                 v-model="form.data.orgasm_d">
