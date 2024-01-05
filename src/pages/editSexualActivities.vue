@@ -1,8 +1,8 @@
 <template>
-    <f7-page name="sexualactivities">
-        <Navbar :backLink="false" title="Aggiungi scopata" />
+    <f7-page name="sexualactivities" @page:beforeout="beforeLeave()">
+        <Navbar :backLink="false" title="Modifica scopata" />
 
-        <f7-block-title>Avete fatto gli sporcaccioni?</f7-block-title>
+        <f7-block-title>Come avete fatto gli sporcaccioni?</f7-block-title>
         <div class="list list-strong-ios list-outline-ios list-dividers-ios">
             <ul>
                 <li>
@@ -84,7 +84,7 @@
                     </label>
                 </li>
                 <li>
-                    <a class="item-link smart-select smart-select-init">
+                    <a class="item-link smart-select smart-select-init" id="smart-select-cumshot-edit">
                         <select name="cumshot" v-model="form.data.cumshot">
                             <option value="mouth">Bocca</option>
                             <option value="face">Faccia</option>
@@ -104,11 +104,11 @@
                 </li>
             </ul>
         </div>
-
+        
         <f7-block-title>Tempo di tirare le somme</f7-block-title>
         <div class="list list-strong-ios list-dividers-ios inset-ios">
             <ul>
-                
+            
                 <li class="item-content item-input">
                     <div class="item-inner">
                         <div class="item-title item-label">Numero orgasmi Andrea</div>
@@ -161,9 +161,11 @@ import Navbar from '@/components/layout/Navbar.vue'
 import constants from '@/js/constants'
 
 export default {
+    name: 'Sexual Activities',
     props: {
         f7route: Object,
         f7router: Object,
+        sexualActivity: Object
     },
     components: {
         Navbar
@@ -185,17 +187,18 @@ export default {
                     "date": ""
                 }
             }, 
-            isLoading: false
+            isLoading: false,
+            sm: undefined
         }
     },
     methods: {
         async saveData() {
             try {
                 this.isLoading = true
-                await axios.post(this.constants.api.sexualActivities, this.form)
+                await axios.put(`${this.constants.api.sexualActivities}/${this.sexualActivity.id}` , this.form)
 
                 f7.toast.create({
-                    text: 'Scopata salvata con successo',
+                    text: 'Scopata modificata con successo',
                     closeTimeout: 2000,
                 }).open()
 
@@ -222,18 +225,47 @@ export default {
             const day = date.toLocaleString('default', { day: '2-digit' });
 
             return [year, month, day].join('-');
+        }, 
+        setupData() {
+            console.log(this.sexualActivity.attributes)
+            this.form.data.sex = this.sexualActivity.attributes.sex
+            this.form.data.blowjob = this.sexualActivity.attributes.blowjob
+            this.form.data.handjob = this.sexualActivity.attributes.handjob
+            this.form.data.anal = this.sexualActivity.attributes.anal
+            this.form.data.fingering = this.sexualActivity.attributes.fingering
+            this.form.data.lick = this.sexualActivity.attributes.lick
+            this.form.data.cumshot = this.sexualActivity.attributes.cumshot
+            this.form.data.orgasm_d = String(this.sexualActivity.attributes.orgasm_d)
+            this.form.data.orgasm_a = this.sexualActivity.attributes.orgasm_a
+            this.form.data.date = this.sexualActivity.attributes.date
+        },
+        
+        beforeLeave() {
+            // f7.smartSelect.destroy('.smart-select')
+            // this.sm = {}
+            // console.log("qui")
         }
     },
-
-    name: 'Sexual Activities',
+    
     mounted() {
-        this.form.data.date = this.getCurrentDate()
-
+        this.setupData()
+        
         f7ready((f7) => {
+            // if(this.sexualActivity == undefined)
+            //     this.f7router.navigate('/addMasturbation/')
+            
+            this.sm = f7.smartSelect.create({el:'#smart-select-cumshot-edit'})
+            
+
+            console.log(this.sexualActivity.attributes.cumshot)
+            console.log(this.sm)
+            
+            this.sm.setValue(this.sexualActivity.attributes.cumshot)
+
             f7.calendar.create({
                 inputEl: '#date-picker-sexualActivities',
                 closeOnSelect: true,
-                value: [this.getCurrentDate()],
+                value: [this.sexualActivity.attributes.date],
                 on: {
                     change: (calendar, value) => {
                         value = value[0]
@@ -247,7 +279,7 @@ export default {
                 }
             })
         })
-    }
+    },
 }
 
 </script>

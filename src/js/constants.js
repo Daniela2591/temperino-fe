@@ -1,5 +1,6 @@
 let _c = {
     baseUrl: 'http://localhost:1338/api/'
+    // baseUrl: 'https://temperino.andreacorriga.com/api/'
 }
 
 let api = {
