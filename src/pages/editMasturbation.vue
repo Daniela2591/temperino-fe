@@ -1,6 +1,6 @@
 <template>
     <f7-page name="masturbation">
-        <Navbar :backLink="false" title="Aggiungi masturbazione" />
+        <Navbar :backLink="false" title="Modifica masturbazione" />
 
         <f7-block-title>Chi si è masturbato?</f7-block-title>
         <div class="list list-strong-ios list-outline-ios list-dividers-ios">
@@ -93,6 +93,7 @@ export default {
     props: {
         f7route: Object,
         f7router: Object,
+        masturbation: Object
     },
     components: {
         Navbar
@@ -108,13 +109,14 @@ export default {
                     date: ""
                 }
             },
-            isLoading: false
+            isLoading: false,
         }
     },
     methods: {
         async saveData() {
             try {
-                await axios.post(this.constants.api.masturbation, this.form)
+                this.isLoading = true
+                await axios.put(`${this.constants.api.masturbation}/${this.masturbation.id}` , this.form)
                 
                 f7.toast.create({
                     text: 'Masturbata salvata con successo',
@@ -144,19 +146,28 @@ export default {
             const day = date.toLocaleString('default', { day: '2-digit' });
 
             return [year, month, day].join('-');
-        }
+        },
+        setupData() {
+            console.log(this.masturbation.attributes)
+            this.form.data.who = this.masturbation.attributes.who
+            this.form.data.n_orgasms = this.masturbation.attributes.n_orgasms
+            this.form.data.toys = this.masturbation.attributes.toys
+            this.form.data.date = this.masturbation.attributes.date
+        },
 
     
     },
     name: 'Masturbation',
     mounted() {
         this.form.data.date = this.getCurrentDate()
+
+        this.setupData()
         
         f7ready((f7) => {
             f7.calendar.create({
                 inputEl: '#date-picker-masturbation',
                 closeOnSelect: true,
-                value: [this.getCurrentDate()],
+                value: [this.masturbation.attributes.date],
                 on: {
                     change: (calendar, value) => {
                         value = value[0]

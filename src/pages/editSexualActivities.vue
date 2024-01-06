@@ -235,7 +235,7 @@ export default {
             this.form.data.fingering = this.sexualActivity.attributes.fingering
             this.form.data.lick = this.sexualActivity.attributes.lick
             this.form.data.cumshot = this.sexualActivity.attributes.cumshot
-            this.form.data.orgasm_d = String(this.sexualActivity.attributes.orgasm_d)
+            this.form.data.orgasm_d = (this.sexualActivity.attributes.orgasm_d)
             this.form.data.orgasm_a = this.sexualActivity.attributes.orgasm_a
             this.form.data.date = this.sexualActivity.attributes.date
         },

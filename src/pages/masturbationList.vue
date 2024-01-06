@@ -1,14 +1,14 @@
 <template>
     <f7-page name="masturbationList">
         <Navbar :backLink="false" title="Lista Masturbazioni" />
-        
+
         <f7-block-title>Lista Masturbate</f7-block-title>
-        
+
 
         <div class="list links-list list-outline-ios list-strong-ios list-dividers-ios">
-        <ul v-for="item in masturbationList" v-bind:key="item">
-            <li><a> {{ item.attributes.who + ' - ' + item.attributes.date }}</a></li>
-        </ul>
+            <ul v-for="item in masturbationList" v-bind:key="item">
+                <li><a @click="navigateTo(item)"> {{ item.attributes.who + ' - ' + item.attributes.date }}</a></li>
+            </ul>
         </div>
 
 
@@ -42,16 +42,25 @@ export default {
     name: 'MasturbationList',
     mounted() {
         f7ready(async (f7) => {
-            try{
-                let response = await axios.get(this.constants.api.masturbation)
+            try {
+                let response = await axios.get(`${this.constants.api.masturbation}?sort=date:desc`)
                 this.masturbationList = response.data.data
                 console.log(this.masturbationList)
             }
-            catch(e){
+            catch (e) {
                 console.error(e)
             }
 
         })
+    },
+    methods: {
+        navigateTo(item) {
+            this.f7router.navigate('/editMasturbation/', {
+                props: {
+                    masturbation: item
+                }
+            })
+        }
     }
 }
 

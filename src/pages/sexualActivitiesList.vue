@@ -38,7 +38,7 @@ export default {
     mounted() {
         f7ready(async (f7) => {
             try{
-                let response = await axios.get(this.constants.api.sexualActivities)
+                let response = await axios.get(`${this.constants.api.sexualActivities}?sort=date:desc`)
                 this.sexualActivitiesList = response.data.data
             }
             catch(e){
