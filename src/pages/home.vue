@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-header">N° scopate</div>
             <div class="card-content card-content-padding">
-                {{ totSex }}
+                {{ sexualActivitiesStore.countSex }}
             </div>
         </div>
 
@@ -17,14 +17,14 @@
             <div class="card">
                 <div class="card-header">Orgasmi Andrea</div>
                 <div class="card-content card-content-padding">
-                    {{ orgasmsA }}
+                    {{ sexualActivitiesStore.countOrgasmA }}
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-header">Orgasmi Daniela</div>
                 <div class="card-content card-content-padding">
-                    {{ orgasmsD }}
+                    {{ sexualActivitiesStore.countOrgasmD }}
                 </div>
             </div>
 
@@ -34,14 +34,14 @@
             <div class="card">
                 <div class="card-header">Pompini</div>
                 <div class="card-content card-content-padding">
-                    {{ blowjob }}
+                    {{ sexualActivitiesStore.countBlowjob }}
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-header">Seghe</div>
                 <div class="card-content card-content-padding">
-                    {{ handjob }}
+                    {{ sexualActivitiesStore.countHandjob }}
                 </div>
             </div>
 
@@ -52,14 +52,14 @@
             <div class="card">
                 <div class="card-header">Ditalini</div>
                 <div class="card-content card-content-padding">
-                    {{ fingering }}
+                    {{ sexualActivitiesStore.countFingering }}
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-header">Leccate</div>
                 <div class="card-content card-content-padding">
-                    {{ lick }}
+                    {{ sexualActivitiesStore.countLick }}
                 </div>
             </div>
 
@@ -68,7 +68,7 @@
         <div class="card">
             <div class="card-header">Anal</div>
             <div class="card-content card-content-padding">
-                {{ anal }}
+                {{ sexualActivitiesStore.countAnal }}
             </div>
         </div>
 
@@ -78,7 +78,8 @@
 <script>
 import Navbar from '@/components/layout/Navbar.vue'
 import constants from '@/js/constants'
-import axios from 'axios'
+
+import {useSexualActivitiesStore} from '@/stores/sexualActivitiesStore'
 
 export default {
     name: 'Home',
@@ -92,61 +93,14 @@ export default {
     data() {
         return {
             constants: constants,
-            currentYear: '',
-            totSex: 0,
-            orgasmsA: 0,
-            orgasmsD: 0,
-            blowjob: 0,
-            handjob: 0,
-            fingering: 0,
-            lick: 0,
-            anal: 0
+            sexualActivitiesStore: useSexualActivitiesStore()
         }
     },
     mounted() {
-        this.getLastYearSexualActivities()
+        this.sexualActivitiesStore.getLastYearSexualActivities()
     },
     methods: {
-        async getLastYearSexualActivities() {
-            this.currentYear = new Date().getFullYear()
-
-            let response = await axios.get(this.constants.api.sexualActivitiesLastYear(this.currentYear))
-
-            this.totSex = this.countSex(response.data.data)
-            this.orgasmsA = this.countOrgasms(response.data.data, 'A')
-            this.orgasmsD = this.countOrgasms(response.data.data, 'D')
-            this.blowjob = this.countBlowjob(response.data.data)
-            this.handjob = this.countHandjob(response.data.data)
-            this.fingering = this.countFingering(response.data.data)
-            this.lick = this.countLick(response.data.data)
-            this.anal = this.countAnal(response.data.data)
-        },
-        countSex(activities) {
-            return activities.reduce((total, x) => (x.attributes.sex == true ? total + 1 : total), 0)
-        },
-        countOrgasms(activities, person) {
-            if (person == 'A') {
-                return activities.reduce((total, x) => (total + x.attributes.orgasm_a), 0)
-            }
-            if (person == 'D') {
-                return activities.reduce((total, x) => (total + x.attributes.orgasm_d), 0)
-            }
-        },
-        countBlowjob(activities) {
-            return activities.reduce((total, x) => (total + x.attributes.blowjob), 0)
-        },
-        countHandjob(activities) {
-            return activities.reduce((total, x) => (total + x.attributes.handjob), 0)
-        },
-        countFingering(activities) {
-            return activities.reduce((total, x) => (total + x.attributes.fingering), 0)
-        },
-        countLick(activities) {
-            return activities.reduce((total, x) => (total + x.attributes.lick), 0)
-        },
-        countAnal(activities) {
-            return activities.reduce((total, x) => (total + x.attributes.anal), 0)
-        },
+        
     }
 }
 </script>
