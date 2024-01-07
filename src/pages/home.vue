@@ -79,7 +79,7 @@
 import Navbar from '@/components/layout/Navbar.vue'
 import constants from '@/js/constants'
 
-import {useSexualActivitiesStore} from '@/stores/sexualActivitiesStore'
+import { useSexualActivitiesStore } from '@/stores/sexualActivitiesStore'
 
 export default {
     name: 'Home',
@@ -93,7 +93,8 @@ export default {
     data() {
         return {
             constants: constants,
-            sexualActivitiesStore: useSexualActivitiesStore()
+            sexualActivitiesStore: useSexualActivitiesStore(),
+            currentYear: new Date().getFullYear()
         }
     },
     mounted() {
