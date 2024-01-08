@@ -99,15 +99,15 @@ export default {
             currentYear: new Date().getFullYear()
         }
     },
-    mounted() {
+    async mounted() {
         this.sexualActivitiesStore.getLastYearSexualActivities()
+        console.log(this.sexualActivitiesStore.sexualActivitiesList)
     },
     methods: {
         async loadMore(done) {
-            const currentYear = new Date().getFullYear()
-            this.sexualActivitiesList = await axios.get(constants.api.sexualActivitiesLastYear(currentYear))
+            this.sexualActivitiesStore.getLastYearSexualActivities()
 
-            done();
+            done()
         }
     }
 }
