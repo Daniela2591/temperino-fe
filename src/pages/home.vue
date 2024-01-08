@@ -95,7 +95,8 @@ export default {
     data() {
         return {
             constants: constants,
-            sexualActivitiesStore: useSexualActivitiesStore()
+            sexualActivitiesStore: useSexualActivitiesStore(),
+            currentYear: new Date().getFullYear()
         }
     },
     mounted() {

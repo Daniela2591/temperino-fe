@@ -8,8 +8,6 @@ export const useSexualActivitiesStore = defineStore('sexualActivityStore', {
     }),
     getters: {
         countSex(state) {
-
-            console.log(state.sexualActivitiesList)
             return state.sexualActivitiesList.reduce((total, x) => (x.attributes.sex == true ? total + 1 : total), 0)
             
         },
@@ -17,7 +15,7 @@ export const useSexualActivitiesStore = defineStore('sexualActivityStore', {
             return state.sexualActivitiesList.reduce((total, x) => (total + x.attributes.orgasm_a), 0)
         },
         countOrgasmD(state) {  
-          return state.sexualActivitiesList.reduce((total, x) => (total + x.attributes.orgasm_d), 0)
+            return state.sexualActivitiesList.reduce((total, x) => (total + x.attributes.orgasm_d), 0)
         },
         countBlowjob(state) {
             return state.sexualActivitiesList.reduce((total, x) => (total + x.attributes.blowjob), 0)
@@ -38,7 +36,7 @@ export const useSexualActivitiesStore = defineStore('sexualActivityStore', {
     actions: {
         async getLastYearSexualActivities() {
             const currentYear = new Date().getFullYear()
-            this.sexualActivitiesList = await axios.get(constants.api.sexualActivitiesLastYear(currentYear))
+            this.sexualActivitiesList = (await axios.get(constants.api.sexualActivitiesLastYear(currentYear))).data.data
         }
     },
 })

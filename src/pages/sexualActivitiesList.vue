@@ -3,7 +3,7 @@
         <Navbar :backLink="false" title="Lista Attività Sessuali" />
 
         <div class="list links-list list-outline-ios list-strong-ios list-dividers-ios">
-        <ul v-for="(item, i) in sexualActivitiesList" v-bind:key="item">
+        <ul v-for="(item, i) in sexualActivitiesStore.sexualActivitiesList" v-bind:key="item">
             <li><a @click="navigateTo(item)"> {{ i + 1}}. {{ item.attributes.date }}</a></li>
         </ul>
         </div>
@@ -13,10 +13,10 @@
 
 <script>
 
-import axios from 'axios'
 import { f7, f7ready } from 'framework7-vue'
 import Navbar from '@/components/layout/Navbar.vue'
 import constants from '@/js/constants'
+import { useSexualActivitiesStore } from '@/stores/sexualActivitiesStore'
 
 export default {
     name: 'sexualActivitiesList',
@@ -30,20 +30,13 @@ export default {
     data() {
         return {
             constants: constants,
-            sexualActivitiesList: []
-
+            sexualActivitiesStore: useSexualActivitiesStore(),
         }
 
     },
     mounted() {
         f7ready(async (f7) => {
-            try{
-                let response = await axios.get(`${this.constants.api.sexualActivities}?sort=date:desc`)
-                this.sexualActivitiesList = response.data.data
-            }
-            catch(e){
-                console.error(e)
-            }
+            
 
         })
     }, 
