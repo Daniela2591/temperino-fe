@@ -89,10 +89,11 @@ import Navbar from '@/components/layout/Navbar.vue'
 import constants from '@/js/constants'
 
 export default {
-    name: '', 
+    name: 'Masturbation', 
     props: {
         f7route: Object,
         f7router: Object,
+
     },
     components: {
         Navbar
@@ -148,7 +149,7 @@ export default {
 
     
     },
-    name: 'Masturbation',
+    
     mounted() {
         this.form.data.date = this.getCurrentDate()
         

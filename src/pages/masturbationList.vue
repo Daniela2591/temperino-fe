@@ -7,7 +7,7 @@
 
         <div class="list links-list list-outline-ios list-strong-ios list-dividers-ios">
             <ul v-for="item in masturbationList" v-bind:key="item">
-                <li><a @click="navigateTo(item)"> {{ item.attributes.who + ' - ' + item.attributes.date }}</a></li>
+                <li><a @click="navigateTo(item)"> {{ item.attributes.who + ' - ' + formatDate(item.attributes.date) }}</a></li>
             </ul>
         </div>
 
@@ -60,6 +60,15 @@ export default {
                     masturbation: item
                 }
             })
+        },
+        formatDate(inputDate) {
+            const date = new Date(inputDate)
+
+            const day = date.getDate().toString().padStart(2, '0')
+            const month = (date.getMonth() + 1).toString().padStart(2, '0') 
+            const year = date.getFullYear()
+
+            return `${day}-${month}-${year}`
         }
     }
 }

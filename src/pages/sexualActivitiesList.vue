@@ -4,7 +4,7 @@
 
         <div class="list links-list list-outline-ios list-strong-ios list-dividers-ios">
         <ul v-for="(item, i) in sexualActivitiesStore.sexualActivitiesList" v-bind:key="item">
-            <li><a @click="navigateTo(item)"> {{ i + 1}}. {{ item.attributes.date }}</a></li>
+            <li><a @click="navigateTo(item)"> {{ i + 1}}. {{ formatDate(item.attributes.date) }}</a></li>
         </ul>
         </div>
     </f7-page>
@@ -47,6 +47,15 @@ export default {
                     sexualActivity: item
                 }
             })
+        },
+        formatDate(inputDate) {
+            const date = new Date(inputDate)
+
+            const day = date.getDate().toString().padStart(2, '0')
+            const month = (date.getMonth() + 1).toString().padStart(2, '0') 
+            const year = date.getFullYear()
+
+            return `${day}-${month}-${year}`
         }
     }
 }
