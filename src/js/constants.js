@@ -8,6 +8,9 @@ let api = {
     sexualActivities: `${_c.baseUrl}sexual-activities`,
     sexualActivitiesLastYear: (year) => {
         return `${_c.baseUrl}sexual-activities?filters[date][$gte]=${year}-01-01&filters[date][$lte]=${year}-12-31`
+    },
+    masturbationsLastYear: (year) => {
+        return `${_c.baseUrl}masturbations?filters[date][$gte]=${year}-01-01&filters[date][$lte]=${year}-12-31`
     }
 }
 

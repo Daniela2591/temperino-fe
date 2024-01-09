@@ -2,11 +2,17 @@
     <f7-page name="sexualactivitiesList">
         <Navbar :backLink="false" title="Lista Attività Sessuali" />
 
-        <div class="list links-list list-outline-ios list-strong-ios list-dividers-ios">
-        <ul v-for="(item, i) in sexualActivitiesStore.sexualActivitiesList" v-bind:key="item">
-            <li><a @click="navigateTo(item)"> {{ i + 1}}. {{ formatDate(item.attributes.date) }}</a></li>
-        </ul>
+        <div class="list links-list list-outline-ios list-strong-ios list-dividers-ios" v-if="sexualActivitiesStore.sexualActivitiesList.length > 0">
+            <ul v-for="(item, i) in sexualActivitiesStore.sexualActivitiesList" v-bind:key="item">
+                <li><a @click="navigateTo(item)"> {{ i + 1}}. {{ formatDate(item.attributes.date) }}</a></li>
+            </ul>
         </div>
+        <div v-else>
+            <f7-block>
+                <div class="alert alert-warning">Non sono presenti attività sessuali</div>
+            </f7-block>
+            
+       </div>
     </f7-page>
 </template>
 

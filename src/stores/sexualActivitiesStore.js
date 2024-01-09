@@ -8,8 +8,7 @@ export const useSexualActivitiesStore = defineStore('sexualActivityStore', {
     }),
     getters: {
         countSex(state) {
-            return state.sexualActivitiesList.reduce((total, x) => (x.attributes.sex == true ? total + 1 : total), 0)
-            
+            return state.sexualActivitiesList.reduce((total, x) => (x.attributes.sex == true ? total + 1 : total), 0)     
         },
         countOrgasmA(state) {
             return state.sexualActivitiesList.reduce((total, x) => (total + x.attributes.orgasm_a), 0)

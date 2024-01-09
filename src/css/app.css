@@ -1,1 +1,39 @@
-/* Your app custom styles here */
+/* Stile di base per l'alert */
+.alert {
+    padding: 15px;
+    border: 1px solid;
+    border-radius: 4px;
+    margin-bottom: 15px;
+     /* Personalizza la larghezza a tuo piacimento */
+  }
+  
+  /* Stili specifici per i diversi tipi di alert */
+  
+  /* Success */
+  .alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+  }
+  
+  /* Warning */
+  .alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+  }
+  
+  /* Danger */
+  .alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+  }
+  
+  /* Info */
+  .alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+  }
+  

@@ -5,11 +5,17 @@
         <f7-block-title>Lista Masturbate</f7-block-title>
 
 
-        <div class="list links-list list-outline-ios list-strong-ios list-dividers-ios">
-            <ul v-for="item in masturbationList" v-bind:key="item">
+        <div class="list links-list list-outline-ios list-strong-ios list-dividers-ios" v-if="masturbationStore.masturbationList.length > 0">
+            <ul v-for="item in masturbationStore.masturbationList" v-bind:key="item">
                 <li><a @click="navigateTo(item)"> {{ item.attributes.who + ' - ' + formatDate(item.attributes.date) }}</a></li>
             </ul>
         </div>
+        <div v-else>
+            <f7-block>
+                <div class="alert alert-warning">Non sono presenti masturbazioni</div>
+            </f7-block>
+            
+       </div>
 
 
 
@@ -18,12 +24,13 @@
 
 <script>
 
-import axios from 'axios'
 import { f7, f7ready } from 'framework7-vue'
 import Navbar from '@/components/layout/Navbar.vue'
 import constants from '@/js/constants'
+import { useMasturbationStore } from '@/stores/masturbationStore'
 
 export default {
+    name: 'masturbationList',
     props: {
         f7route: Object,
         f7router: Object,
@@ -34,22 +41,16 @@ export default {
     data() {
         return {
             constants: constants,
-            masturbationList: []
+            masturbationStore: useMasturbationStore()
 
         }
 
     },
-    name: 'MasturbationList',
     mounted() {
         f7ready(async (f7) => {
-            try {
-                let response = await axios.get(`${this.constants.api.masturbation}?sort=date:desc`)
-                this.masturbationList = response.data.data
-                console.log(this.masturbationList)
-            }
-            catch (e) {
-                console.error(e)
-            }
+            this.masturbationStore.getLastYearMasturbation()
+        console.log(this.masturbationStore.masturbationList)
+            
 
         })
     },

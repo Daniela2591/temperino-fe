@@ -115,6 +115,7 @@ export default {
     methods: {
         async saveData() {
             try {
+                this.isLoading = true
                 await axios.post(this.constants.api.masturbation, this.form)
                 
                 f7.toast.create({
