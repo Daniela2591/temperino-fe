@@ -104,17 +104,17 @@
                 </li>
             </ul>
         </div>
-        
+
         <f7-block-title>Tempo di tirare le somme</f7-block-title>
         <div class="list list-strong-ios list-dividers-ios inset-ios">
             <ul>
-            
+
                 <li class="item-content item-input">
                     <div class="item-inner">
                         <div class="item-title item-label">Numero orgasmi Andrea</div>
                         <div class="item-input-wrap">
-                        <input type="number"  min="0" max="12" v-model="form.data.orgasm_a">
-                        <span class="input-clear-button"></span>
+                            <input type="number" min="0" max="12" v-model="form.data.orgasm_a">
+                            <span class="input-clear-button"></span>
                         </div>
                     </div>
                 </li>
@@ -123,8 +123,8 @@
                     <div class="item-inner">
                         <div class="item-title item-label">Numero orgasmi Daniela</div>
                         <div class="item-input-wrap">
-                        <input type="number" min="0" max="12" v-model="form.data.orgasm_d">
-                        <span class="input-clear-button"></span>
+                            <input type="number" min="0" max="12" v-model="form.data.orgasm_d">
+                            <span class="input-clear-button"></span>
                         </div>
                     </div>
                 </li>
@@ -151,6 +151,9 @@
         <f7-block>
             <f7-button fill round @click="saveData" preloader :loading="isLoading">Salva</f7-button>
         </f7-block>
+        <f7-block>
+            <f7-button fill round @click="deleteData">Cancella</f7-button>
+        </f7-block>
     </f7-page>
 </template>
 
@@ -159,6 +162,8 @@ import axios from 'axios'
 import { f7, f7ready } from 'framework7-vue'
 import Navbar from '@/components/layout/Navbar.vue'
 import constants from '@/js/constants'
+import { useSexualActivitiesStore } from '@/stores/sexualActivitiesStore'
+
 
 export default {
     name: 'Sexual Activities',
@@ -186,16 +191,18 @@ export default {
                     "orgasm_a": null,
                     "date": ""
                 }
-            }, 
+            },
             isLoading: false,
-            sm: undefined
+            sm: undefined,
+            sexualActivitiesStore: useSexualActivitiesStore(),
+
         }
     },
     methods: {
         async saveData() {
             try {
                 this.isLoading = true
-                await axios.put(`${this.constants.api.sexualActivities}/${this.sexualActivity.id}` , this.form)
+                await axios.put(`${this.constants.api.sexualActivities}/${this.sexualActivity.id}`, this.form)
 
                 f7.toast.create({
                     text: 'Scopata modificata con successo',
@@ -217,6 +224,16 @@ export default {
             }
         },
 
+        async deleteData() {
+            f7.dialog.confirm('Faceva così schifo?', async () => {
+                await this.sexualActivitiesStore.deleteSexualActivity(this.sexualActivity.id)
+                this.f7router.navigate('/')
+            })
+
+           
+
+        },
+
         getCurrentDate(date = new Date()) {
             const year = date.toLocaleString('default', { year: 'numeric' });
             const month = date.toLocaleString('default', {
@@ -225,7 +242,7 @@ export default {
             const day = date.toLocaleString('default', { day: '2-digit' });
 
             return [year, month, day].join('-');
-        }, 
+        },
         setupData() {
             console.log(this.sexualActivity.attributes)
             this.form.data.sex = this.sexualActivity.attributes.sex
@@ -239,27 +256,27 @@ export default {
             this.form.data.orgasm_a = this.sexualActivity.attributes.orgasm_a
             this.form.data.date = this.sexualActivity.attributes.date
         },
-        
+
         beforeLeave() {
             // f7.smartSelect.destroy('.smart-select')
             // this.sm = {}
             // console.log("qui")
         }
     },
-    
+
     mounted() {
         this.setupData()
-        
+
         f7ready((f7) => {
             // if(this.sexualActivity == undefined)
             //     this.f7router.navigate('/addMasturbation/')
-            
-            this.sm = f7.smartSelect.create({el:'#smart-select-cumshot-edit'})
-            
+
+            this.sm = f7.smartSelect.create({ el: '#smart-select-cumshot-edit' })
+
 
             console.log(this.sexualActivity.attributes.cumshot)
             console.log(this.sm)
-            
+
             this.sm.setValue(this.sexualActivity.attributes.cumshot)
 
             f7.calendar.create({

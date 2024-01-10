@@ -8,12 +8,12 @@ export const useSexualActivitiesStore = defineStore('sexualActivityStore', {
     }),
     getters: {
         countSex(state) {
-            return state.sexualActivitiesList.reduce((total, x) => (x.attributes.sex == true ? total + 1 : total), 0)     
+            return state.sexualActivitiesList.reduce((total, x) => (x.attributes.sex == true ? total + 1 : total), 0)
         },
         countOrgasmA(state) {
             return state.sexualActivitiesList.reduce((total, x) => (total + x.attributes.orgasm_a), 0)
         },
-        countOrgasmD(state) {  
+        countOrgasmD(state) {
             return state.sexualActivitiesList.reduce((total, x) => (total + x.attributes.orgasm_d), 0)
         },
         countBlowjob(state) {
@@ -36,6 +36,16 @@ export const useSexualActivitiesStore = defineStore('sexualActivityStore', {
         async getLastYearSexualActivities() {
             const currentYear = new Date().getFullYear()
             this.sexualActivitiesList = (await axios.get(constants.api.sexualActivitiesLastYear(currentYear))).data.data
+        },
+        async deleteSexualActivity(sexualActivityId) {
+            await axios.delete(`${constants.api.sexualActivities}/${sexualActivityId}`)
+        },
+        async updateSexualActivity(sexualActivityId, form) {
+            await axios.put(`${constants.api.sexualActivities}/${sexualActivityId}`, form)
+        },
+        async addSexualActivity(form) {
+            await axios.post(constants.api.sexualActivities, form)
         }
     },
+
 })
