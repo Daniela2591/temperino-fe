@@ -192,7 +192,7 @@ export default {
         async saveData() {
             try {
                 this.isLoading = true
-                await axios.post(this.constants.api.sexualActivities, this.form)
+                await axios.post(constants.api.sexualActivities, this.form)
 
                 f7.toast.create({
                     text: 'Scopata salvata con successo',
