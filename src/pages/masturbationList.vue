@@ -3,20 +3,40 @@
         <f7-page name="masturbationList">
             <Navbar :backLink="false" title="Lista Masturbazioni" />
 
-            <f7-block-title>Lista Masturbate</f7-block-title>
+            <!-- <f7-block-title>Lista Masturbate</f7-block-title> -->
 
 
-            <div class="list links-list list-outline-ios list-strong-ios list-dividers-ios" v-if="masturbationStore.masturbationList.length > 0">
+            <div class="block-title">Lista Masturbate</div>
+            <div class="list media-list  list-outline-ios list-strong-ios list-dividers-ios"
+                v-if="masturbationStore.masturbationList.length > 0">
                 <ul v-for="item in masturbationStore.masturbationList" v-bind:key="item">
-                    <li><a @click="navigateTo(item)"> {{ item.attributes.who + ' - ' + formatDate(item.attributes.date) }}</a></li>
+                    <li>
+                        <a class="item-link item-content" @click="navigateTo(item)">
+                            <div class="item-media">
+                                <img style="border-radius: 8px"
+                                    :src="getIcon(item.attributes.who)" width="50" />
+
+                            </div>
+                            <div class="item-inner">
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">{{ formatDate(item.attributes.date) }}</div>
+                                        <div class="item-after">{{ getFullName(item.attributes.who) }}</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div v-else>
                 <f7-block>
                     <div class="alert alert-warning">Non sono presenti masturbazioni</div>
                 </f7-block>
-                
-        </div>
+            </div>
+
+
 
         </f7-page>
     </f7-page>
@@ -49,8 +69,8 @@ export default {
     mounted() {
         f7ready(async (f7) => {
             this.masturbationStore.getLastYearMasturbation()
-        
-            
+
+
 
         })
     },
@@ -66,7 +86,7 @@ export default {
             const date = new Date(inputDate)
 
             const day = date.getDate().toString().padStart(2, '0')
-            const month = (date.getMonth() + 1).toString().padStart(2, '0') 
+            const month = (date.getMonth() + 1).toString().padStart(2, '0')
             const year = date.getFullYear()
 
             return `${day}-${month}-${year}`
@@ -75,7 +95,28 @@ export default {
             await this.masturbationStore.getLastYearMasturbation()
 
             done()
-        }
+        },
+        getIcon(who){
+            if ( who == "A"){
+                return "/icons/temperinoA.jpg"
+            }
+
+            if ( who == "D"){
+                return "/icons/temperinoD.jpg"
+             }
+
+             return ""
+        },
+        getFullName(who){
+            if (who == "A"){
+                return "Andrea"
+            }
+
+            if (who == "D") {
+                return "Daniela"
+            }
+            return ""
+        }   
     }
 }
 
