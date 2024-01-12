@@ -149,10 +149,10 @@
         </div>
 
         <f7-block>
-            <f7-button fill round @click="saveData" preloader :loading="isLoading">Salva</f7-button>
+            <f7-button fill round @click="saveData" preloader :loading="isLoadingSave">Salva</f7-button>
         </f7-block>
         <f7-block>
-            <f7-button fill round @click="deleteData">Cancella</f7-button>
+            <f7-button fill color="red" round @click="deleteData" preloader :loading="isLoadingDelete">Cancella</f7-button>
         </f7-block>
     </f7-page>
 </template>
@@ -192,7 +192,8 @@ export default {
                     "date": ""
                 }
             },
-            isLoading: false,
+            isLoadingSave: false,
+            isLoadingDelete: false,
             sm: undefined,
             sexualActivitiesStore: useSexualActivitiesStore(),
 
@@ -201,8 +202,9 @@ export default {
     methods: {
         async saveData() {
             try {
-                this.isLoading = true
-                await axios.put(`${this.constants.api.sexualActivities}/${this.sexualActivity.id}`, this.form)
+                this.isLoadingSave = true
+                
+                await this.sexualActivitiesStore.updateSexualActivity(this.sexualActivity.id, this.form)
 
                 f7.toast.create({
                     text: 'Scopata modificata con successo',
@@ -220,18 +222,33 @@ export default {
                 console.error(e)
             }
             finally {
-                this.isLoading = false
+                this.isLoadingSave = false
             }
         },
 
         async deleteData() {
             f7.dialog.confirm('Faceva così schifo?', async () => {
-                await this.sexualActivitiesStore.deleteSexualActivity(this.sexualActivity.id)
-                this.f7router.navigate('/')
+                try {
+                    this.isLoadingDelete = true
+                    await this.sexualActivitiesStore.deleteSexualActivity(this.sexualActivity.id)
+
+                    f7.toast.create({
+                        text: 'Fai finta che non sia mai successo',
+                        closeTimeout: 2000,
+                    }).open()
+
+                    this.f7router.navigate('/')
+                }
+                catch (e) {
+                    f7.toast.create({
+                        text: 'Mi spiace te la devi ricordare a vita',
+                        closeTimeout: 2000,
+                    }).open()
+                }
+                finally {
+                    this.loadingDelete = false
+                }
             })
-
-           
-
         },
 
         getCurrentDate(date = new Date()) {
