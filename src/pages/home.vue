@@ -101,7 +101,7 @@ export default {
     },
     async mounted() {
         this.sexualActivitiesStore.getLastYearSexualActivities()
-        console.log(this.sexualActivitiesStore.sexualActivitiesList)
+        
     },
     methods: {
         async loadMore(done) {

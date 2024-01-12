@@ -152,7 +152,7 @@
             <f7-button fill round @click="saveData" preloader :loading="isLoadingSave">Salva</f7-button>
         </f7-block>
         <f7-block>
-            <f7-button fill color="red" round @click="deleteData" preloader :loading="isLoadingDelete">Cancella</f7-button>
+            <f7-button fill round color="red"  @click="deleteData" preloader :loading="isLoadingDelete">Cancella</f7-button>
         </f7-block>
     </f7-page>
 </template>
@@ -261,7 +261,7 @@ export default {
             return [year, month, day].join('-');
         },
         setupData() {
-            console.log(this.sexualActivity.attributes)
+            
             this.form.data.sex = this.sexualActivity.attributes.sex
             this.form.data.blowjob = this.sexualActivity.attributes.blowjob
             this.form.data.handjob = this.sexualActivity.attributes.handjob

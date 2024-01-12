@@ -52,8 +52,8 @@
                     <div class="item-inner">
                         <div class="item-title item-label">Numero orgasmi</div>
                         <div class="item-input-wrap">
-                        <input type="number" min="0" max="12" v-model="form.data.n_orgasms">
-                        <span class="input-clear-button"></span>
+                            <input type="number" min="0" max="12" v-model="form.data.n_orgasms">
+                            <span class="input-clear-button"></span>
                         </div>
                     </div>
                 </li>
@@ -77,8 +77,13 @@
         </div>
 
         <f7-block>
-            <f7-button fill round @click="saveData" preloader :loading="isLoading">Salva</f7-button>
+            <f7-button fill round @click="saveData" preloader :loading="isLoadingSave">Salva</f7-button>
         </f7-block>
+        <f7-block>
+            <f7-button fill round color="red" @click="deleteData" preloader :loading="isLoadingDelete">Cancella</f7-button>
+        </f7-block>
+
+
     </f7-page>
 </template>
 
@@ -87,9 +92,10 @@ import axios from 'axios'
 import { f7, f7ready } from 'framework7-vue'
 import Navbar from '@/components/layout/Navbar.vue'
 import constants from '@/js/constants'
+import { useMasturbationStore } from '@/stores/masturbationStore'
 
 export default {
-    name: '', 
+    name: '',
     props: {
         f7route: Object,
         f7router: Object,
@@ -109,15 +115,17 @@ export default {
                     date: ""
                 }
             },
-            isLoading: false,
+            isLoadingSave: false,
+            isLoadingDelete: false,
+            masturbationStore: useMasturbationStore(),
         }
     },
     methods: {
         async saveData() {
             try {
-                this.isLoading = true
-                await axios.put(`${this.constants.api.masturbation}/${this.masturbation.id}` , this.form)
-                
+                this.isLoadingSave = true
+                await this.masturbationStore.updateMasturbation(this.masturbation.id, this.form)
+
                 f7.toast.create({
                     text: 'Masturbata salvata con successo',
                     closeTimeout: 2000,
@@ -125,7 +133,7 @@ export default {
 
                 this.f7router.navigate('/')
             }
-            catch(e){
+            catch (e) {
                 f7.toast.create({
                     text: 'Errore generico nel salvataggio dei dati',
                     closeTimeout: 2000,
@@ -134,10 +142,38 @@ export default {
                 console.error(e)
             }
             finally {
-                this.isLoading = false
+                this.isLoadingSave = false
             }
         },
 
+        async deleteData() {
+            f7.dialog.confirm('Faceva così schifo?', async () => {
+                try {
+                    this.isLoadingDelete = true
+                    await this.masturbationStore.deleteMasturbation(this.masturbation.id)
+
+
+                    f7.toast.create({
+                        text: 'Fai finta che non sia mai successo',
+                        closeTimeout: 2000,
+                    }).open()
+
+                   this.f7router.navigate('/')
+                }
+                catch (e) {
+                    f7.toast.create({
+                        text: 'Mi spiace te la devi ricordare a vita',
+                        closeTimeout: 2000,
+
+                    }).open()
+                }
+                finally {
+                    this.isLoadingDelete = false
+                }
+
+            })
+
+        },
         getCurrentDate(date = new Date()) {
             const year = date.toLocaleString('default', { year: 'numeric' });
             const month = date.toLocaleString('default', {
@@ -148,21 +184,20 @@ export default {
             return [year, month, day].join('-');
         },
         setupData() {
-            console.log(this.masturbation.attributes)
+            
             this.form.data.who = this.masturbation.attributes.who
             this.form.data.n_orgasms = this.masturbation.attributes.n_orgasms
             this.form.data.toys = this.masturbation.attributes.toys
             this.form.data.date = this.masturbation.attributes.date
         },
-
-    
     },
+
     name: 'Masturbation',
     mounted() {
         this.form.data.date = this.getCurrentDate()
 
         this.setupData()
-        
+
         f7ready((f7) => {
             f7.calendar.create({
                 inputEl: '#date-picker-masturbation',
@@ -183,5 +218,4 @@ export default {
         })
     }
 }
-
 </script>

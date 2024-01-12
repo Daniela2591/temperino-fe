@@ -1,24 +1,24 @@
 <template>
-    <f7-page name="masturbationList">
-        <Navbar :backLink="false" title="Lista Masturbazioni" />
+    <f7-page ptr :ptr-mousewheel="true" @ptr:refresh="loadMore">
+        <f7-page name="masturbationList">
+            <Navbar :backLink="false" title="Lista Masturbazioni" />
 
-        <f7-block-title>Lista Masturbate</f7-block-title>
+            <f7-block-title>Lista Masturbate</f7-block-title>
 
 
-        <div class="list links-list list-outline-ios list-strong-ios list-dividers-ios" v-if="masturbationStore.masturbationList.length > 0">
-            <ul v-for="item in masturbationStore.masturbationList" v-bind:key="item">
-                <li><a @click="navigateTo(item)"> {{ item.attributes.who + ' - ' + formatDate(item.attributes.date) }}</a></li>
-            </ul>
+            <div class="list links-list list-outline-ios list-strong-ios list-dividers-ios" v-if="masturbationStore.masturbationList.length > 0">
+                <ul v-for="item in masturbationStore.masturbationList" v-bind:key="item">
+                    <li><a @click="navigateTo(item)"> {{ item.attributes.who + ' - ' + formatDate(item.attributes.date) }}</a></li>
+                </ul>
+            </div>
+            <div v-else>
+                <f7-block>
+                    <div class="alert alert-warning">Non sono presenti masturbazioni</div>
+                </f7-block>
+                
         </div>
-        <div v-else>
-            <f7-block>
-                <div class="alert alert-warning">Non sono presenti masturbazioni</div>
-            </f7-block>
-            
-       </div>
 
-
-
+        </f7-page>
     </f7-page>
 </template>
 
@@ -49,7 +49,7 @@ export default {
     mounted() {
         f7ready(async (f7) => {
             this.masturbationStore.getLastYearMasturbation()
-        console.log(this.masturbationStore.masturbationList)
+        
             
 
         })
@@ -70,6 +70,11 @@ export default {
             const year = date.getFullYear()
 
             return `${day}-${month}-${year}`
+        },
+        async loadMore(done) {
+            await this.masturbationStore.getLastYearMasturbation()
+
+            done()
         }
     }
 }
