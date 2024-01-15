@@ -13,8 +13,7 @@
                     <li>
                         <a class="item-link item-content" @click="navigateTo(item)">
                             <div class="item-media">
-                                <img style="border-radius: 8px"
-                                    :src="getIcon(item.attributes.who)" width="50" />
+                                <img style="border-radius: 8px" :src="getIcon(item.attributes.who)" width="50" />
 
                             </div>
                             <div class="item-inner">
@@ -39,6 +38,11 @@
 
 
         </f7-page>
+
+        <f7-fab href="/addMasturbation/" position="right-bottom">
+            <f7-icon ios="f7:plus" md="material:add" ></f7-icon>
+            <f7-icon ios="f7:xmark" md="material:close"></f7-icon>
+        </f7-fab>
     </f7-page>
 </template>
 
@@ -75,6 +79,7 @@ export default {
         })
     },
     methods: {
+
         navigateTo(item) {
             this.f7router.navigate('/editMasturbation/', {
                 props: {
@@ -96,19 +101,19 @@ export default {
 
             done()
         },
-        getIcon(who){
-            if ( who == "A"){
+        getIcon(who) {
+            if (who == "A") {
                 return "/icons/temperinoA.jpg"
             }
 
-            if ( who == "D"){
+            if (who == "D") {
                 return "/icons/temperinoD.jpg"
-             }
+            }
 
-             return ""
+            return ""
         },
-        getFullName(who){
-            if (who == "A"){
+        getFullName(who) {
+            if (who == "A") {
                 return "Andrea"
             }
 
@@ -116,7 +121,7 @@ export default {
                 return "Daniela"
             }
             return ""
-        }   
+        }
     }
 }
 

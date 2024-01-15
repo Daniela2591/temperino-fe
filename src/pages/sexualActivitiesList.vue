@@ -15,6 +15,10 @@
                 
         </div>
         </f7-page>
+        <f7-fab href="/addSexualActivities/" position="right-bottom">
+            <f7-icon ios="f7:plus" md="material:add" ></f7-icon>
+            <f7-icon ios="f7:xmark" md="material:close"></f7-icon>
+        </f7-fab>
     </f7-page>
 </template>
 
