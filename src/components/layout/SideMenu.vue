@@ -1,6 +1,8 @@
 <template>
     <f7-panel id="panel-nested" theme-dark left cover container-el="#panel-page">
         <f7-page>
+            <div class="side-menu-header"></div>
+
             <f7-block-title>Statistiche</f7-block-title>
             <f7-list>
                 <f7-list-item title="Home" link="/" panel-close></f7-list-item>
@@ -26,3 +28,13 @@ export default {
     name: 'SideMenu'
 }
 </script>
+
+<style scoped>
+.side-menu-header {
+    height: 100px;
+    background-image: url('/icons/side-menu-temperino.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+</style>
