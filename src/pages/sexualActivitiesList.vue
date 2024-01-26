@@ -1,20 +1,18 @@
 <template>
-    <f7-page ptr :ptr-mousewheel="true" @ptr:refresh="loadMore">
-        <f7-page name="sexualactivitiesList">
-            <Navbar :backLink="false" title="Lista Attività Sessuali" />
+    <f7-page name="sexualactivitiesList" ptr :ptr-mousewheel="true" @ptr:refresh="loadMore">
+        <Navbar :backLink="false" title="Lista Attività Sessuali" />
 
-            <div class="list links-list list-outline-ios list-strong-ios list-dividers-ios" v-if="sexualActivitiesStore.sexualActivitiesList.length > 0">
-                <ul v-for="(item, i) in sexualActivitiesStore.sexualActivitiesList" v-bind:key="item">
-                    <li><a @click="navigateTo(item)"> {{ i + 1}}. {{ formatDate(item.attributes.date) }}</a></li>
-                </ul>
-            </div>
-            <div v-else>
-                <f7-block>
-                    <div class="alert alert-warning">Non sono presenti attività sessuali</div>
-                </f7-block>
-                
+        <div class="list links-list list-outline-ios list-strong-ios list-dividers-ios" v-if="sexualActivitiesStore.sexualActivitiesList.length > 0">
+            <ul v-for="(item, i) in sexualActivitiesStore.sexualActivitiesList" v-bind:key="item">
+                <li><a @click="navigateTo(item)"> {{ i + 1}}. {{ formatDate(item.attributes.date) }}</a></li>
+            </ul>
         </div>
-        </f7-page>
+        <div v-else>
+            <f7-block>
+                <div class="alert alert-warning">Non sono presenti attività sessuali</div>
+            </f7-block>
+        </div>
+        
         <f7-fab href="/addSexualActivities/" position="right-bottom">
             <f7-icon ios="f7:plus" md="material:add" ></f7-icon>
             <f7-icon ios="f7:xmark" md="material:close"></f7-icon>

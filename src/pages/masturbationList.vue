@@ -1,43 +1,39 @@
 <template>
-    <f7-page ptr :ptr-mousewheel="true" @ptr:refresh="loadMore">
-        <f7-page name="masturbationList">
-            <Navbar :backLink="false" title="Lista Masturbazioni" />
+    <f7-page name="masturbationList" ptr :ptr-mousewheel="true" @ptr:refresh="loadMore">
 
-            <!-- <f7-block-title>Lista Masturbate</f7-block-title> -->
+        <Navbar :backLink="false" title="Lista Masturbazioni" />
+
+        <!-- <f7-block-title>Lista Masturbate</f7-block-title> -->
 
 
-            <div class="block-title">Lista Masturbate</div>
-            <div class="list media-list  list-outline-ios list-strong-ios list-dividers-ios"
-                v-if="masturbationStore.masturbationList.length > 0">
-                <ul v-for="item in masturbationStore.masturbationList" v-bind:key="item">
-                    <li>
-                        <a class="item-link item-content" @click="navigateTo(item)">
-                            <div class="item-media">
-                                <img style="border-radius: 8px" :src="getIcon(item.attributes.who)" width="50" />
+        <div class="block-title">Lista Masturbate</div>
+        <div class="list media-list  list-outline-ios list-strong-ios list-dividers-ios"
+            v-if="masturbationStore.masturbationList.length > 0">
+            <ul v-for="item in masturbationStore.masturbationList" v-bind:key="item">
+                <li>
+                    <a class="item-link item-content" @click="navigateTo(item)">
+                        <div class="item-media">
+                            <img style="border-radius: 8px" :src="getIcon(item.attributes.who)" width="50" />
 
-                            </div>
+                        </div>
+                        <div class="item-inner">
                             <div class="item-inner">
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title">{{ formatDate(item.attributes.date) }}</div>
-                                        <div class="item-after">{{ getFullName(item.attributes.who) }}</div>
-                                    </div>
+                                <div class="item-title-row">
+                                    <div class="item-title">{{ formatDate(item.attributes.date) }}</div>
+                                    <div class="item-after">{{ getFullName(item.attributes.who) }}</div>
                                 </div>
-
                             </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div v-else>
-                <f7-block>
-                    <div class="alert alert-warning">Non sono presenti masturbazioni</div>
-                </f7-block>
-            </div>
 
-
-
-        </f7-page>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div v-else>
+            <f7-block>
+                <div class="alert alert-warning">Non sono presenti masturbazioni</div>
+            </f7-block>
+        </div>
 
         <f7-fab href="/addMasturbation/" position="right-bottom">
             <f7-icon ios="f7:plus" md="material:add" ></f7-icon>

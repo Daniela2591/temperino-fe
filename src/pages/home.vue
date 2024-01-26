@@ -1,93 +1,91 @@
 <template>
     <f7-page ptr :ptr-mousewheel="true" @ptr:refresh="loadMore">
-        <f7-page name="home">
-            <!-- Top Navbar -->
-            <Navbar :backLink="false" title="Temperino" />
+        <!-- Top Navbar -->
+        <Navbar :backLink="false" title="Temperino" />
 
-            <f7-block-title>Resoconto anno {{ currentYear }}</f7-block-title>
+        <f7-block-title>Resoconto anno {{ currentYear }}</f7-block-title>
+
+        <div class="card">
+            <div class="card-header">N° scopate</div>
+            <div class="card-content card-content-padding">
+                {{ sexualActivitiesStore.countSex }}
+            </div>
+        </div>
+
+        <f7-block-title>Numero orgasmi totali</f7-block-title>
+        <div class="grid grid-cols-2">
 
             <div class="card">
-                <div class="card-header">N° scopate</div>
+                <div class="card-header">Andrea</div>
                 <div class="card-content card-content-padding">
-                    {{ sexualActivitiesStore.countSex }}
+                    {{ sexualActivitiesStore.countOrgasmA + masturbationStore.countOrgasmA}}
                 </div>
             </div>
 
-            <f7-block-title>Numero orgasmi totali</f7-block-title>
-            <div class="grid grid-cols-2">
-
-                <div class="card">
-                    <div class="card-header">Andrea</div>
-                    <div class="card-content card-content-padding">
-                        {{ sexualActivitiesStore.countOrgasmA + masturbationStore.countOrgasmA}}
-                    </div>
+            <div class="card">
+                <div class="card-header">Daniela</div>
+                <div class="card-content card-content-padding">
+                    {{ sexualActivitiesStore.countOrgasmD + masturbationStore.countOrgasmD}}
                 </div>
-
-                <div class="card">
-                    <div class="card-header">Daniela</div>
-                    <div class="card-content card-content-padding">
-                        {{ sexualActivitiesStore.countOrgasmD + masturbationStore.countOrgasmD}}
-                    </div>
-                </div>
-
             </div>
 
-            <f7-block-title>Attività</f7-block-title>
-            <div class="grid grid-cols-2">
+        </div>
 
-                <div class="card">
-                    <div class="card-header">Pompini</div>
-                    <div class="card-content card-content-padding">
-                        {{ sexualActivitiesStore.countBlowjob }}
-                    </div>
+        <f7-block-title>Attività</f7-block-title>
+        <div class="grid grid-cols-2">
+
+            <div class="card">
+                <div class="card-header">Pompini</div>
+                <div class="card-content card-content-padding">
+                    {{ sexualActivitiesStore.countBlowjob }}
                 </div>
-
-                <div class="card">
-                    <div class="card-header">Seghe</div>
-                    <div class="card-content card-content-padding">
-                        {{ sexualActivitiesStore.countHandjob }}
-                    </div>
-                </div>
-
             </div>
 
-            <div class="grid grid-cols-2">
-
-                <div class="card">
-                    <div class="card-header">Ditalini</div>
-                    <div class="card-content card-content-padding">
-                        {{ sexualActivitiesStore.countFingering }}
-                    </div>
+            <div class="card">
+                <div class="card-header">Seghe</div>
+                <div class="card-content card-content-padding">
+                    {{ sexualActivitiesStore.countHandjob }}
                 </div>
-
-                <div class="card">
-                    <div class="card-header">Leccate</div>
-                    <div class="card-content card-content-padding">
-                        {{ sexualActivitiesStore.countLick }}
-                    </div>
-                </div>
-
             </div>
 
-            <div class="grid grid-cols-2">
+        </div>
 
-                <div class="card">
-                    <div class="card-header">Spagnolette</div>
-                    <div class="card-content card-content-padding">
-                        {{ sexualActivitiesStore.countTitsFuck }}
-                    </div>
+        <div class="grid grid-cols-2">
+
+            <div class="card">
+                <div class="card-header">Ditalini</div>
+                <div class="card-content card-content-padding">
+                    {{ sexualActivitiesStore.countFingering }}
                 </div>
-
-                <div class="card">
-                    <div class="card-header">Anal</div>
-                    <div class="card-content card-content-padding">
-                        {{ sexualActivitiesStore.countAnal }}
-                    </div>
-                </div>
-
             </div>
 
-        </f7-page>
+            <div class="card">
+                <div class="card-header">Leccate</div>
+                <div class="card-content card-content-padding">
+                    {{ sexualActivitiesStore.countLick }}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="grid grid-cols-2">
+
+            <div class="card">
+                <div class="card-header">Spagnolette</div>
+                <div class="card-content card-content-padding">
+                    {{ sexualActivitiesStore.countTitsFuck }}
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Anal</div>
+                <div class="card-content card-content-padding">
+                    {{ sexualActivitiesStore.countAnal }}
+                </div>
+            </div>
+
+        </div>
+
     </f7-page>
 </template>
 
