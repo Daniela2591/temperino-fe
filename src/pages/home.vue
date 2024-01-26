@@ -13,23 +13,26 @@
                 </div>
             </div>
 
+            <f7-block-title>Numero orgasmi totali</f7-block-title>
             <div class="grid grid-cols-2">
 
                 <div class="card">
-                    <div class="card-header">Orgasmi Andrea</div>
+                    <div class="card-header">Andrea</div>
                     <div class="card-content card-content-padding">
-                        {{ sexualActivitiesStore.countOrgasmA }}
+                        {{ sexualActivitiesStore.countOrgasmA + masturbationStore.countOrgasmA}}
                     </div>
                 </div>
 
                 <div class="card">
-                    <div class="card-header">Orgasmi Daniela</div>
+                    <div class="card-header">Daniela</div>
                     <div class="card-content card-content-padding">
-                        {{ sexualActivitiesStore.countOrgasmD }}
+                        {{ sexualActivitiesStore.countOrgasmD + masturbationStore.countOrgasmD}}
                     </div>
                 </div>
 
             </div>
+
+            <f7-block-title>Attività</f7-block-title>
             <div class="grid grid-cols-2">
 
                 <div class="card">
@@ -66,12 +69,24 @@
 
             </div>
 
-            <div class="card">
-                <div class="card-header">Anal</div>
-                <div class="card-content card-content-padding">
-                    {{ sexualActivitiesStore.countAnal }}
+            <div class="grid grid-cols-2">
+
+                <div class="card">
+                    <div class="card-header">Spagnolette</div>
+                    <div class="card-content card-content-padding">
+                        {{ sexualActivitiesStore.countTitsFuck }}
+                    </div>
                 </div>
+
+                <div class="card">
+                    <div class="card-header">Anal</div>
+                    <div class="card-content card-content-padding">
+                        {{ sexualActivitiesStore.countAnal }}
+                    </div>
+                </div>
+
             </div>
+
         </f7-page>
     </f7-page>
 </template>
@@ -79,9 +94,9 @@
 <script>
 import Navbar from '@/components/layout/Navbar.vue'
 import constants from '@/js/constants'
-import axios from 'axios'
 
 import { useSexualActivitiesStore } from '@/stores/sexualActivitiesStore'
+import { useMasturbationStore } from '@/stores/masturbationStore'
 
 export default {
     name: 'Home',
@@ -96,16 +111,19 @@ export default {
         return {
             constants: constants,
             sexualActivitiesStore: useSexualActivitiesStore(),
+            masturbationStore: useMasturbationStore(),
             currentYear: new Date().getFullYear()
         }
     },
     async mounted() {
         this.sexualActivitiesStore.getLastYearSexualActivities()
+        this.masturbationStore.getLastYearMasturbation()
         
     },
     methods: {
         async loadMore(done) {
             this.sexualActivitiesStore.getLastYearSexualActivities()
+            this.masturbationStore.getLastYearMasturbation()
 
             done()
         }

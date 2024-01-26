@@ -28,6 +28,9 @@ export const useSexualActivitiesStore = defineStore('sexualActivityStore', {
         countLick(state) {
             return state.sexualActivitiesList.reduce((total, x) => (total + x.attributes.lick), 0)
         },
+        countTitsFuck(state) {
+            return state.sexualActivitiesList.reduce((total, x) => (total + x.attributes.tits_fuck), 0)
+        },
         countAnal(state) {
             return state.sexualActivitiesList.reduce((total, x) => (total + x.attributes.anal), 0)
         },

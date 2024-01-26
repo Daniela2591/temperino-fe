@@ -1,8 +1,8 @@
 <template>
     <f7-page name="sexualactivities">
-        <Navbar :backLink="false" title="Aggiungi scopata" />
+        <Navbar :backLink="false" title="Aggiungi attività" />
 
-        <f7-block-title>Avete fatto gli sporcaccioni?</f7-block-title>
+        <f7-block-title>Come avete fatto gli sporcaccioni?</f7-block-title>
         <div class="list list-strong-ios list-outline-ios list-dividers-ios">
             <ul>
                 <li>
@@ -77,6 +77,19 @@
                             <div class="item-after">
                                 <div class="toggle toggle-init color-red">
                                     <input type="checkbox" v-model="form.data.lick">
+                                    <span class="toggle-icon"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </li>
+                <li>
+                    <label class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">Spagnola</div>
+                            <div class="item-after">
+                                <div class="toggle toggle-init color-red">
+                                    <input type="checkbox" v-model="form.data.tits_fuck">
                                     <span class="toggle-icon"></span>
                                 </div>
                             </div>
@@ -172,17 +185,18 @@ export default {
         return {
             constants: constants,
             form: {
-                "data": {
-                    "sex": 0,
-                    "blowjob": 0,
-                    "handjob": 0,
-                    "anal": 0,
-                    "fingering": 0,
-                    "lick": 0,
-                    "cumshot": "",
-                    "orgasm_d": null,
-                    "orgasm_a": null,
-                    "date": ""
+                data: {
+                    sex: 0,
+                    blowjob: 0,
+                    handjob: 0,
+                    anal: 0,
+                    fingering: 0,
+                    lick: 0,
+                    tits_fuck: 0,
+                    cumshot: "",
+                    orgasm_d: null,
+                    orgasm_a: null,
+                    date: ""
                 }
             }, 
             isLoading: false

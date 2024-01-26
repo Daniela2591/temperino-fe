@@ -7,7 +7,18 @@ export const useMasturbationStore = defineStore('masturbationStore', {
         masturbationList: [],
     }),
     getters: {
-
+        countOrgasmA(state) {
+            return state.masturbationList.reduce((total, x) => (x.attributes.who == "A" ? total + x.attributes.n_orgasms : total), 0) //(total + x.attributes.n_orgasms), 0)
+        },
+        countOrgasmD(state) {
+            return state.masturbationList.reduce((total, x) => (x.attributes.who == "D" ? total + x.attributes.n_orgasms : total), 0)
+        },
+        countMasturbationA(state) {
+            return state.masturbationList.reduce((total, x) => (x.attributes.who == "A" ? total + 1 : total), 0)
+        },
+        countMasturbationD(state) {
+            return state.masturbationList.reduce((total, x) => (x.attributes.who == "D" ? total + 1 : total), 0)
+        },
     },
     actions: {
         async getLastYearMasturbation() {

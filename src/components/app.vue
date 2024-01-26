@@ -28,7 +28,7 @@ export default {
         // Framework7 Parameters
         const f7params = {
             name: 'Temperino',
-            theme: 'md',
+            theme: 'auto',
             colors: {
                 primary: '#007aff',
             },

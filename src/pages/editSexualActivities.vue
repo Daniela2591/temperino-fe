@@ -1,6 +1,6 @@
 <template>
     <f7-page name="sexualactivities" @page:beforeout="beforeLeave()">
-        <Navbar :backLink="false" title="Modifica scopata" />
+        <Navbar :backLink="false" title="Modifica attività " />
 
         <f7-block-title>Come avete fatto gli sporcaccioni?</f7-block-title>
         <div class="list list-strong-ios list-outline-ios list-dividers-ios">
@@ -77,6 +77,19 @@
                             <div class="item-after">
                                 <div class="toggle toggle-init color-red">
                                     <input type="checkbox" v-model="form.data.lick">
+                                    <span class="toggle-icon"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </li>
+                <li>
+                    <label class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">Spagnola</div>
+                            <div class="item-after">
+                                <div class="toggle toggle-init color-red">
+                                    <input type="checkbox" v-model="form.data.tits_fuck">
                                     <span class="toggle-icon"></span>
                                 </div>
                             </div>
@@ -179,17 +192,18 @@ export default {
         return {
             constants: constants,
             form: {
-                "data": {
-                    "sex": 0,
-                    "blowjob": 0,
-                    "handjob": 0,
-                    "anal": 0,
-                    "fingering": 0,
-                    "lick": 0,
-                    "cumshot": "",
-                    "orgasm_d": null,
-                    "orgasm_a": null,
-                    "date": ""
+                data: {
+                    sex: 0,
+                    blowjob: 0,
+                    handjob: 0,
+                    anal: 0,
+                    fingering: 0,
+                    lick: 0,
+                    tits_fuck: 0,
+                    cumshot: "",
+                    orgasm_d: null,
+                    orgasm_a: null,
+                    date: ""
                 }
             },
             isLoadingSave: false,
@@ -268,6 +282,7 @@ export default {
             this.form.data.anal = this.sexualActivity.attributes.anal
             this.form.data.fingering = this.sexualActivity.attributes.fingering
             this.form.data.lick = this.sexualActivity.attributes.lick
+            this.form.data.tits_fuck = this.sexualActivity.attributes.tits_fuck
             this.form.data.cumshot = this.sexualActivity.attributes.cumshot
             this.form.data.orgasm_d = (this.sexualActivity.attributes.orgasm_d)
             this.form.data.orgasm_a = this.sexualActivity.attributes.orgasm_a
