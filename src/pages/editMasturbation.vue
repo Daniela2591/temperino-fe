@@ -1,6 +1,11 @@
 <template>
     <f7-page name="masturbation">
-        <Navbar :backLink="false" title="Modifica masturbazione" />
+        <f7-navbar>
+            <f7-nav-left>
+                <f7-link icon-ios="f7:menu" icon-aurora="f7:menu" icon-md="material:menu" panel-open="left"></f7-link>
+                <f7-nav-title> Modifica masturbazione </f7-nav-title>
+            </f7-nav-left>
+        </f7-navbar>
 
         <f7-block-title>Chi si è masturbato?</f7-block-title>
         <div class="list list-strong-ios list-outline-ios list-dividers-ios">
@@ -88,9 +93,8 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { f7, f7ready } from 'framework7-vue'
-import Navbar from '@/components/layout/Navbar.vue'
+
 import constants from '@/js/constants'
 import { useMasturbationStore } from '@/stores/masturbationStore'
 
@@ -102,7 +106,6 @@ export default {
         masturbation: Object
     },
     components: {
-        Navbar
     },
     data() {
         return {

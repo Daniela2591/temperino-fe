@@ -7,10 +7,10 @@ let api = {
     masturbation: `${_c.baseUrl}masturbations`,
     sexualActivities: `${_c.baseUrl}sexual-activities`,
     sexualActivitiesLastYear: (year) => {
-        return `${_c.baseUrl}sexual-activities?filters[date][$gte]=${year}-01-01&filters[date][$lte]=${year}-12-31`
+        return `${_c.baseUrl}sexual-activities?filters[date][$gte]=${year}-01-01&filters[date][$lte]=${year}-12-31&sort[1]=date:desc`
     },
     masturbationsLastYear: (year) => {
-        return `${_c.baseUrl}masturbations?filters[date][$gte]=${year}-01-01&filters[date][$lte]=${year}-12-31`
+        return `${_c.baseUrl}masturbations?filters[date][$gte]=${year}-01-01&filters[date][$lte]=${year}-12-31&sort[1]=date:desc`
     }
 }
 

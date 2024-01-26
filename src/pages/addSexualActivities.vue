@@ -1,6 +1,11 @@
 <template>
     <f7-page name="sexualactivities">
-        <Navbar :backLink="false" title="Aggiungi attività" />
+        <f7-navbar>
+            <f7-nav-left>
+                <f7-link icon-ios="f7:menu" icon-aurora="f7:menu" icon-md="material:menu" panel-open="left"></f7-link>
+                <f7-nav-title> Aggiungi attività </f7-nav-title>
+            </f7-nav-left>
+        </f7-navbar>
 
         <f7-block-title>Come avete fatto gli sporcaccioni?</f7-block-title>
         <div class="list list-strong-ios list-outline-ios list-dividers-ios">
@@ -170,7 +175,7 @@
 <script>
 import axios from 'axios'
 import { f7, f7ready } from 'framework7-vue'
-import Navbar from '@/components/layout/Navbar.vue'
+
 import constants from '@/js/constants'
 
 export default {
@@ -179,7 +184,6 @@ export default {
         f7router: Object,
     },
     components: {
-        Navbar
     },
     data() {
         return {

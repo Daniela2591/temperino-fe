@@ -1,6 +1,12 @@
 <template>
     <f7-page name="sexualactivities" @page:beforeout="beforeLeave()">
-        <Navbar :backLink="false" title="Modifica attività " />
+        
+        <f7-navbar>
+            <f7-nav-left>
+                <f7-link icon-ios="f7:menu" icon-aurora="f7:menu" icon-md="material:menu" panel-open="left"></f7-link>
+                <f7-nav-title> Modifica attività </f7-nav-title>
+            </f7-nav-left>
+        </f7-navbar>
 
         <f7-block-title>Come avete fatto gli sporcaccioni?</f7-block-title>
         <div class="list list-strong-ios list-outline-ios list-dividers-ios">
@@ -171,9 +177,8 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { f7, f7ready } from 'framework7-vue'
-import Navbar from '@/components/layout/Navbar.vue'
+
 import constants from '@/js/constants'
 import { useSexualActivitiesStore } from '@/stores/sexualActivitiesStore'
 
@@ -186,7 +191,6 @@ export default {
         sexualActivity: Object
     },
     components: {
-        Navbar
     },
     data() {
         return {
@@ -306,8 +310,8 @@ export default {
             this.sm = f7.smartSelect.create({ el: '#smart-select-cumshot-edit' })
 
 
-            console.log(this.sexualActivity.attributes.cumshot)
-            console.log(this.sm)
+            // console.log(this.sexualActivity.attributes.cumshot)
+            // console.log(this.sm)
 
             this.sm.setValue(this.sexualActivity.attributes.cumshot)
 
