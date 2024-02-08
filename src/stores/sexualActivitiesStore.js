@@ -41,13 +41,13 @@ export const useSexualActivitiesStore = defineStore('sexualActivityStore', {
             this.sexualActivitiesList = (await axios.get(constants.api.sexualActivitiesLastYear(currentYear))).data.data
         },
         async deleteSexualActivity(sexualActivityId) {
-            await axios.delete(`${constants.api.sexualActivities}/${sexualActivityId}`)
+            await axios.delete(`${constants.api.sexualActivities}/${sexualActivityId}`, constants.api.headers)
         },
         async updateSexualActivity(sexualActivityId, form) {
-            await axios.put(`${constants.api.sexualActivities}/${sexualActivityId}`, form)
+            await axios.put(`${constants.api.sexualActivities}/${sexualActivityId}`, form, constants.api.headers)
         },
         async addSexualActivity(form) {
-            await axios.post(constants.api.sexualActivities, form)
+            await axios.post(constants.api.sexualActivities, form, constants.api.headers)
         }
     },
 

@@ -50,21 +50,6 @@
             </ul>
         </div>
 
-        <f7-block-title>Quanti orgasmi si è fatto?</f7-block-title>
-        <div class="list list-strong-ios list-dividers-ios inset-ios">
-            <ul>
-                <li class="item-content item-input">
-                    <div class="item-inner">
-                        <div class="item-title item-label">Numero orgasmi</div>
-                        <div class="item-input-wrap">
-                            <input type="number" min="0" max="12" v-model="form.data.n_orgasms">
-                            <span class="input-clear-button"></span>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
         <f7-block-title>Quando si è masturbato?</f7-block-title>
         <div class="list list-strong-ios list-outline-ios">
             <ul>
@@ -81,11 +66,15 @@
             </ul>
         </div>
 
+        <f7-block-title>Quanti orgasmi si è fatto?</f7-block-title>
         <f7-block>
-            <f7-button fill round @click="saveData" preloader :loading="isLoadingSave">Salva</f7-button>
+            <f7-stepper large v-model:value="form.data.n_orgasms" min="0"/>
         </f7-block>
+
         <f7-block>
-            <f7-button fill round color="red" @click="deleteData" preloader :loading="isLoadingDelete">Cancella</f7-button>
+            <f7-button fill round @click="saveData" preloader :loading="isLoadingSave" large>Salva</f7-button>
+        
+            <f7-button class="mt-4" fill round color="red" @click="deleteData" preloader :loading="isLoadingDelete">Cancella</f7-button>
         </f7-block>
 
 
@@ -104,8 +93,6 @@ export default {
         f7route: Object,
         f7router: Object,
         masturbation: Object
-    },
-    components: {
     },
     data() {
         return {
@@ -127,6 +114,7 @@ export default {
         async saveData() {
             try {
                 this.isLoadingSave = true
+                
                 await this.masturbationStore.updateMasturbation(this.masturbation.id, this.form)
 
                 f7.toast.create({
@@ -153,15 +141,15 @@ export default {
             f7.dialog.confirm('Faceva così schifo?', async () => {
                 try {
                     this.isLoadingDelete = true
-                    await this.masturbationStore.deleteMasturbation(this.masturbation.id)
 
+                    await this.masturbationStore.deleteMasturbation(this.masturbation.id)
 
                     f7.toast.create({
                         text: 'Fai finta che non sia mai successo',
                         closeTimeout: 2000,
                     }).open()
 
-                   this.f7router.navigate('/')
+                    this.f7router.navigate('/')
                 }
                 catch (e) {
                     f7.toast.create({

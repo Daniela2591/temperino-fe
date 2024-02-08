@@ -27,13 +27,13 @@ export const useMasturbationStore = defineStore('masturbationStore', {
             
         },
         async deleteMasturbation(masturbationId) {
-            await axios.delete(`${constants.api.masturbation}/${masturbationId}`)
+            await axios.delete(`${constants.api.masturbation}/${masturbationId}`, constants.api.headers)
         },
         async updateMasturbation(masturbationId, form) {
-            await axios.put(`${constants.api.masturbation}/${masturbationId}`, form)
+            await axios.put(`${constants.api.masturbation}/${masturbationId}`, form, constants.api.headers)
         },
         async addMasturbation(form) {
-            await axios.post(constants.api.masturbation, form)
+            await axios.post(constants.api.masturbation, form, constants.api.headers)
         },
     }
 })

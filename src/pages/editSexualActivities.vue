@@ -9,7 +9,7 @@
         </f7-navbar>
 
         <f7-block-title>Come avete fatto gli sporcaccioni?</f7-block-title>
-        <div class="list list-strong-ios list-outline-ios list-dividers-ios">
+        <div class="list list-strong-ios list-outline-ios list-dividers-ios mb-0">
             <ul>
                 <li>
                     <label class="item-content">
@@ -124,35 +124,8 @@
             </ul>
         </div>
 
-        <f7-block-title>Tempo di tirare le somme</f7-block-title>
-        <div class="list list-strong-ios list-dividers-ios inset-ios">
-            <ul>
-
-                <li class="item-content item-input">
-                    <div class="item-inner">
-                        <div class="item-title item-label">Numero orgasmi Andrea</div>
-                        <div class="item-input-wrap">
-                            <input type="number" min="0" max="12" v-model="form.data.orgasm_a">
-                            <span class="input-clear-button"></span>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="item-content item-input">
-                    <div class="item-inner">
-                        <div class="item-title item-label">Numero orgasmi Daniela</div>
-                        <div class="item-input-wrap">
-                            <input type="number" min="0" max="12" v-model="form.data.orgasm_d">
-                            <span class="input-clear-button"></span>
-                        </div>
-                    </div>
-                </li>
-
-            </ul>
-        </div>
-
         <f7-block-title>Quando è capitato il fattaccio?</f7-block-title>
-        <div class="list list-strong-ios list-outline-ios">
+        <div class="list list-strong-ios list-outline-ios mb-0">
             <ul>
                 <li>
                     <div class="item-content item-input">
@@ -167,11 +140,25 @@
             </ul>
         </div>
 
-        <f7-block>
-            <f7-button fill round @click="saveData" preloader :loading="isLoadingSave">Salva</f7-button>
-        </f7-block>
-        <f7-block>
-            <f7-button fill round color="red"  @click="deleteData" preloader :loading="isLoadingDelete">Cancella</f7-button>
+        <div class="grid grid-cols-2 grid-gap text-align-center">
+            <div>
+                <f7-block-title>N° orgasmi Andrea</f7-block-title>
+                <f7-block>
+                    <f7-stepper large v-model:value="form.data.orgasm_a" min="0" />
+                </f7-block>
+            </div>
+
+            <div>
+                <f7-block-title>N° orgasmi Daniela</f7-block-title>
+                <f7-block>
+                    <f7-stepper large color="red" v-model:value="form.data.orgasm_d" min="0" />
+                </f7-block>
+            </div>
+        </div>
+
+        <f7-block class="mt-2">
+            <f7-button fill round @click="saveData" preloader :loading="isLoadingSave" large>Salva</f7-button>
+            <f7-button class="mt-4" fill round color="red"  @click="deleteData" preloader :loading="isLoadingDelete">Cancella</f7-button>
         </f7-block>
     </f7-page>
 </template>

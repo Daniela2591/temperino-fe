@@ -16,7 +16,6 @@ import { f7, f7ready } from 'framework7-vue';
 import { getDevice } from 'framework7/lite-bundle';
 import capacitorApp from '../js/capacitor-app.js';
 import routes from '../js/routes.js';
-import store from '../js/store';
 import SideMenu from './layout/SideMenu.vue'
 
 export default {

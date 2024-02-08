@@ -57,13 +57,10 @@ export default {
         f7route: Object,
         f7router: Object,
     },
-    components: {
-    },
     data() {
         return {
             constants: constants,
             masturbationStore: useMasturbationStore()
-
         }
 
     },

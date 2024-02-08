@@ -51,21 +51,6 @@
             </ul>
         </div>
 
-        <f7-block-title>Quanti orgasmi si è fatto?</f7-block-title>
-        <div class="list list-strong-ios list-dividers-ios inset-ios">
-            <ul>
-                <li class="item-content item-input">
-                    <div class="item-inner">
-                        <div class="item-title item-label">Numero orgasmi</div>
-                        <div class="item-input-wrap">
-                        <input type="number" min="0" max="12" v-model="form.data.n_orgasms">
-                        <span class="input-clear-button"></span>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
         <f7-block-title>Quando si è masturbato?</f7-block-title>
         <div class="list list-strong-ios list-outline-ios">
             <ul>
@@ -82,8 +67,13 @@
             </ul>
         </div>
 
+        <f7-block-title>Quanti orgasmi si è fatto?</f7-block-title>
         <f7-block>
-            <f7-button fill round @click="saveData" preloader :loading="isLoading">Salva</f7-button>
+            <f7-stepper large v-model:value="form.data.n_orgasms" min="0"/>
+        </f7-block>
+
+        <f7-block>
+            <f7-button fill round @click="saveData" preloader :loading="isLoading" large>Salva</f7-button>
         </f7-block>
         
     </f7-page>
@@ -93,6 +83,7 @@
 import axios from 'axios'
 import { f7, f7ready } from 'framework7-vue'
 
+import { useMasturbationStore } from '@/stores/masturbationStore'
 import constants from '@/js/constants'
 
 export default {
@@ -107,10 +98,11 @@ export default {
     data() {
         return {
             constants: constants,
+            masturbationStore: useMasturbationStore(),
             form: {
                 data: {
                     who: "A",
-                    n_orgasms: null,
+                    n_orgasms: 0,
                     toys: 0,
                     date: ""
                 }
@@ -122,7 +114,7 @@ export default {
         async saveData() {
             try {
                 this.isLoading = true
-                await axios.post(this.constants.api.masturbation, this.form)
+                await this.masturbationStore.addMasturbation(this.form)
                 
                 f7.toast.create({
                     text: 'Masturbata salvata con successo',

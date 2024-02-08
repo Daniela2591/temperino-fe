@@ -123,35 +123,8 @@
             </ul>
         </div>
 
-        <f7-block-title>Tempo di tirare le somme</f7-block-title>
-        <div class="list list-strong-ios list-dividers-ios inset-ios">
-            <ul>
-                
-                <li class="item-content item-input">
-                    <div class="item-inner">
-                        <div class="item-title item-label">Numero orgasmi Andrea</div>
-                        <div class="item-input-wrap">
-                        <input type="number"  min="0" max="12" v-model="form.data.orgasm_a">
-                        <span class="input-clear-button"></span>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="item-content item-input">
-                    <div class="item-inner">
-                        <div class="item-title item-label">Numero orgasmi Daniela</div>
-                        <div class="item-input-wrap">
-                        <input type="number" min="0" max="12" v-model="form.data.orgasm_d">
-                        <span class="input-clear-button"></span>
-                        </div>
-                    </div>
-                </li>
-
-            </ul>
-        </div>
-
-        <f7-block-title>Quando è capitato il fattaccio?</f7-block-title>
-        <div class="list list-strong-ios list-outline-ios">
+        <f7-block-title class="mt-0">Quando è capitato il fattaccio?</f7-block-title>
+        <div class="list list-strong-ios list-outline-ios mb-0">
             <ul>
                 <li>
                     <div class="item-content item-input">
@@ -166,8 +139,24 @@
             </ul>
         </div>
 
-        <f7-block>
-            <f7-button fill round @click="saveData" preloader :loading="isLoading">Salva</f7-button>
+        <div class="grid grid-cols-2 grid-gap text-align-center">
+            <div>
+                <f7-block-title>N° orgasmi Andrea</f7-block-title>
+                <f7-block>
+                    <f7-stepper large v-model:value="form.data.orgasm_a" min="0" />
+                </f7-block>
+            </div>
+
+            <div>
+                <f7-block-title>N° orgasmi Daniela</f7-block-title>
+                <f7-block>
+                    <f7-stepper large color="red" v-model:value="form.data.orgasm_d" min="0" />
+                </f7-block>
+            </div>
+        </div>
+    
+        <f7-block class="mt-2">
+            <f7-button fill round @click="saveData" preloader :loading="isLoading" large>Salva</f7-button>
         </f7-block>
     </f7-page>
 </template>
@@ -175,7 +164,7 @@
 <script>
 import axios from 'axios'
 import { f7, f7ready } from 'framework7-vue'
-
+import { useSexualActivitiesStore } from '@/stores/sexualActivitiesStore'
 import constants from '@/js/constants'
 
 export default {
@@ -198,20 +187,22 @@ export default {
                     lick: 0,
                     tits_fuck: 0,
                     cumshot: "",
-                    orgasm_d: null,
-                    orgasm_a: null,
+                    orgasm_d: 0,
+                    orgasm_a: 0,
                     date: ""
                 }
             }, 
-            isLoading: false
+            isLoading: false,
+            sexualActivitiesStore: useSexualActivitiesStore()
         }
     },
     methods: {
         async saveData() {
             try {
                 this.isLoading = true
-                await axios.post(constants.api.sexualActivities, this.form)
-
+                
+                await this.sexualActivitiesStore.addSexualActivity(this.form)
+                
                 f7.toast.create({
                     text: 'Scopata salvata con successo',
                     closeTimeout: 2000,

@@ -53,16 +53,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.card-header,
-.card-footer {
-    display: block !important;
-    text-align: center;
-    font-size: 18px;
-}
-
-.card-content {
-    text-align: center;
-}
-</style>
