@@ -8,10 +8,21 @@ import EditMasturbation from '../pages/editMasturbation.vue'
 import MasturbationList from '../pages/masturbationList.vue'
 import SexualActivitiesList from '../pages/sexualActivitiesList.vue'
 
+import SexualActivitiesDashboard from '../pages/sexualActivitiesDashboad.vue'
+import MasturbationDashboard from '../pages/masturbationDashboard.vue'
+
 var routes = [
     {
         path: '/',
         component: HomePage
+    },
+    {
+        path: '/sexualActivitiesDashboard/',
+        component: SexualActivitiesDashboard
+    },
+    {
+        path: '/masturbationDashboard/',
+        component: MasturbationDashboard
     },
     {
         path: '/addMasturbation/',

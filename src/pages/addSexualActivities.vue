@@ -143,14 +143,14 @@
             <div>
                 <f7-block-title>N° orgasmi Andrea</f7-block-title>
                 <f7-block>
-                    <f7-stepper large v-model:value="form.data.orgasm_a" min="0" />
+                    <f7-stepper large v-model:value="form.data.orgasm_a" />
                 </f7-block>
             </div>
 
             <div>
                 <f7-block-title>N° orgasmi Daniela</f7-block-title>
                 <f7-block>
-                    <f7-stepper large color="red" v-model:value="form.data.orgasm_d" min="0" />
+                    <f7-stepper large color="red" v-model:value="form.data.orgasm_d" />
                 </f7-block>
             </div>
         </div>

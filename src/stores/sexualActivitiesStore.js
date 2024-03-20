@@ -7,6 +7,9 @@ export const useSexualActivitiesStore = defineStore('sexualActivityStore', {
         sexualActivitiesList: [],
     }),
     getters: {
+        countAll(state) {
+            return state.sexualActivitiesList.length
+        },
         countSex(state) {
             return state.sexualActivitiesList.reduce((total, x) => (x.attributes.sex == true ? total + 1 : total), 0)
         },
@@ -15,6 +18,15 @@ export const useSexualActivitiesStore = defineStore('sexualActivityStore', {
         },
         countOrgasmD(state) {
             return state.sexualActivitiesList.reduce((total, x) => (total + x.attributes.orgasm_d), 0)
+        },
+        countOrgasmWhenSexA(state) {
+            return state.sexualActivitiesList.reduce((total, x) => (x.attributes.sex == true ? total + x.attributes.orgasm_a : total), 0)
+        },
+        countOrgasmWhenSexD(state) {
+            return state.sexualActivitiesList.reduce((total, x) => (x.attributes.sex == true ? total + x.attributes.orgasm_d : total), 0)
+        },
+        ratioOrgasm(state) {
+            return (parseInt(this.countOrgasmWhenSexD) / parseInt(this.countOrgasmWhenSexA)).toFixed(2)
         },
         countBlowjob(state) {
             return state.sexualActivitiesList.reduce((total, x) => (total + x.attributes.blowjob), 0)
@@ -34,6 +46,34 @@ export const useSexualActivitiesStore = defineStore('sexualActivityStore', {
         countAnal(state) {
             return state.sexualActivitiesList.reduce((total, x) => (total + x.attributes.anal), 0)
         },
+        getCountersArray(state) {
+            return [
+                {
+                    name: "Pompini",
+                    count: this.countBlowjob
+                },
+                {
+                    name: "Seghe",
+                    count: this.countHandjob
+                },
+                {
+                    name: "Ditalini",
+                    count: this.countFingering
+                },
+                {
+                    name: "Leccate",
+                    count: this.countLick
+                },
+                {
+                    name: "Spagnolette",
+                    count: this.countTitsFuck
+                },
+                {
+                    name: "Anal",
+                    count: this.countAnal
+                }
+            ]
+        }
     },
     actions: {
         async getLastYearSexualActivities() {

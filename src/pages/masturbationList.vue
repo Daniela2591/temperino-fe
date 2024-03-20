@@ -4,11 +4,11 @@
         <f7-navbar>
             <f7-nav-left>
                 <f7-link icon-ios="f7:menu" icon-aurora="f7:menu" icon-md="material:menu" panel-open="left"></f7-link>
-                <f7-nav-title> Lista Masturbazioni </f7-nav-title>
+                <!-- <f7-nav-title> Lista Masturbazioni</f7-nav-title> -->
             </f7-nav-left>
         </f7-navbar>
 
-        <f7-block-title>Lista Masturbate</f7-block-title>
+        <f7-block-title>Lista masturbazioni ({{ masturbationStore.countAll }})</f7-block-title>
         <div class="list media-list  list-outline-ios list-strong-ios list-dividers-ios"
             v-if="masturbationStore.masturbationList.length > 0">
             <ul v-for="item in masturbationStore.masturbationList" v-bind:key="item">

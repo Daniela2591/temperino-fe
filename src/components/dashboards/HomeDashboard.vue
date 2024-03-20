@@ -27,59 +27,12 @@
 
     </div>
 
-    <f7-block-title>Attività</f7-block-title>
-    <div class="grid grid-cols-2">
-
-        <div class="card">
-            <div class="card-header">Pompini</div>
-            <div class="card-content card-content-padding">
-                {{ sexualActivitiesStore.countBlowjob }}
-            </div>
+    <f7-block-title>Visualizza le dashboard</f7-block-title>
+    <div class="block">
+        <div class="grid grid-cols-2 grid-gap">
+            <div> <a class="button button-large button-raised button-fill" href="/masturbationDashboard/">Masturbazioni</a> </div>
+            <div> <a class="button button-large button-raised button-fill" href="/sexualActivitiesDashboard/">Attività sessuali</a> </div>
         </div>
-
-        <div class="card">
-            <div class="card-header">Seghe</div>
-            <div class="card-content card-content-padding">
-                {{ sexualActivitiesStore.countHandjob }}
-            </div>
-        </div>
-
-    </div>
-
-    <div class="grid grid-cols-2">
-
-        <div class="card">
-            <div class="card-header">Ditalini</div>
-            <div class="card-content card-content-padding">
-                {{ sexualActivitiesStore.countFingering }}
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">Leccate</div>
-            <div class="card-content card-content-padding">
-                {{ sexualActivitiesStore.countLick }}
-            </div>
-        </div>
-
-    </div>
-
-    <div class="grid grid-cols-2">
-
-        <div class="card">
-            <div class="card-header">Spagnolette</div>
-            <div class="card-content card-content-padding">
-                {{ sexualActivitiesStore.countTitsFuck }}
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">Anal</div>
-            <div class="card-content card-content-padding">
-                {{ sexualActivitiesStore.countAnal }}
-            </div>
-        </div>
-
     </div>
 </template>
 
@@ -99,7 +52,6 @@ export default {
     },
     async mounted() {
         this.sexualActivitiesStore.getLastYearSexualActivities()
-        this.masturbationStore.getLastYearMasturbation()
         
     },
     methods: {
