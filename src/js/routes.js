@@ -10,6 +10,7 @@ import SexualActivitiesList from '../pages/sexualActivitiesList.vue'
 
 import SexualActivitiesDashboard from '../pages/sexualActivitiesDashboad.vue'
 import MasturbationDashboard from '../pages/masturbationDashboard.vue'
+import ChartsDashboard from '../pages/chartsDashboard.vue'
 
 var routes = [
     {
@@ -23,6 +24,10 @@ var routes = [
     {
         path: '/masturbationDashboard/',
         component: MasturbationDashboard
+    },
+    {
+        path: '/chartsDashboard/',
+        component: ChartsDashboard
     },
     {
         path: '/addMasturbation/',

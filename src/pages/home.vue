@@ -10,7 +10,47 @@
 
         </f7-navbar>
 
-        <HomeDashboard />
+        <f7-block-title>Resoconto anno {{ currentYear }}</f7-block-title>
+
+    <div class="card">
+        <div class="card-header">N° scopate</div>
+        <div class="card-content card-content-padding">
+            {{ sexualActivitiesStore.countSex }}
+        </div>
+    </div>
+
+    <f7-block-title>Numero orgasmi totali</f7-block-title>
+    <div class="grid grid-cols-2">
+
+        <div class="card">
+            <div class="card-header">Andrea</div>
+            <div class="card-content card-content-padding">
+                {{ sexualActivitiesStore.countOrgasmA + masturbationStore.countOrgasmA }}
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Daniela</div>
+            <div class="card-content card-content-padding">
+                {{ sexualActivitiesStore.countOrgasmD + masturbationStore.countOrgasmD }}
+            </div>
+        </div>
+
+    </div>
+
+    <f7-block-title>Visualizza le dashboard</f7-block-title>
+    <div class="block">
+        <div class="grid grid-cols-2 grid-gap">
+            <div> 
+                <a class="button button-large button-raised button-fill" href="/masturbationDashboard/">Masturbazioni</a>
+            </div>
+
+            <div> 
+                <a class="button button-large button-raised button-fill" href="/sexualActivitiesDashboard/">Attività sessuali</a>
+            </div>
+        </div>
+        <a class="button button-large button-raised button-fill mt-5" href="/chartsDashboard/">Grafici</a>
+    </div>
     </f7-page>
 </template>
 
@@ -21,7 +61,6 @@ import constants from '@/js/constants'
 import { useSexualActivitiesStore } from '@/stores/sexualActivitiesStore'
 import { useMasturbationStore } from '@/stores/masturbationStore'
 
-import HomeDashboard from '@/components/dashboards/HomeDashboard.vue'
 
 export default {
     name: 'Home',
@@ -30,7 +69,6 @@ export default {
         f7router: Object,
     },
     components: {
-        HomeDashboard
     },
     data() {
         return {
@@ -41,7 +79,8 @@ export default {
         }
     },
     async mounted() {
-        
+        this.sexualActivitiesStore.getLastYearSexualActivities()
+        this.masturbationStore.getLastYearMasturbation()
     },
     methods: {
         async loadMore(done) {
@@ -53,3 +92,16 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.card-header,
+.card-footer {
+    display: block !important;
+    text-align: center;
+    font-size: 18px;
+}
+
+.card-content {
+    text-align: center;
+}
+</style>

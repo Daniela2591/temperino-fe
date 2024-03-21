@@ -16,6 +16,7 @@ import '../css/app.css';
 
 // Import App Component
 import App from '../components/app.vue';
+import VueApexCharts from "vue3-apexcharts";
 
 // Init Framework7-Vue Plugin
 Framework7.use(Framework7Vue);
@@ -28,5 +29,6 @@ const pinia = createPinia()
 // Register Framework7 Vue components
 registerComponents(app);
 app.use(pinia)
+app.use(VueApexCharts);
 // Mount the app
 app.mount('#app');

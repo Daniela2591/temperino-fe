@@ -28,7 +28,9 @@
     "@capacitor/keyboard": "^5.0.7",
     "@capacitor/splash-screen": "^5.0.6",
     "@capacitor/status-bar": "^5.0.6",
+    "apexcharts": "^3.48.0",
     "axios": "^1.6.3",
+    "dayjs": "^1.11.10",
     "dom7": "^4.0.6",
     "dotenv": "^16.3.1",
     "framework7": "^8.3.0",
@@ -38,7 +40,8 @@
     "pinia": "^2.1.7",
     "skeleton-elements": "^4.0.1",
     "swiper": "^11.0.5",
-    "vue": "^3.3.13"
+    "vue": "^3.3.13",
+    "vue3-apexcharts": "^1.5.2"
   },
   "devDependencies": {
     "@capacitor/assets": "^3.0.4",

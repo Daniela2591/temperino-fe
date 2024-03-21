@@ -77,8 +77,6 @@ import constants from '@/js/constants'
 
 import { useMasturbationStore } from '@/stores/masturbationStore'
 
-import HomeDashboard from '@/components/dashboards/HomeDashboard.vue'
-
 export default {
     name: 'Home',
     props: {
@@ -86,7 +84,6 @@ export default {
         f7router: Object,
     },
     components: {
-        HomeDashboard
     },
     data() {
         return {
